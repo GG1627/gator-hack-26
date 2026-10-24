@@ -1,0 +1,12 @@
+export type Decision = {t: number; decision: string; reason: string; score?: number; threshold?: number; uncertainty_um?: number | null; event_interest?: number; gap?: number; remaining_budget_before: number; remaining_budget_after: number; active_tracks?: number};
+export type Config = { acquired_indices: number[]; budget: number; frame_count: number; policy: string; seed: number; model_version: string; photon_code_sha256: string; sequence_sha256: string };
+export type Run = { key: string; sequence_id: string; budget: number; frame_count: number; frame_interval_minutes: number; shape: number[]; normalization: {background: number; scale: number}; voxel_size_xyz_um: number[]; sequence_sha256: string; methods: Record<string, {config: Config; decisions: Decision[]; config_source: string; trace_source: string}>; gaussian_counts: Record<string, number> };
+export type Errors = {mse: number; mae: number; frames: number};
+export type Scores = {own_withheld: Record<string, Errors>; matched_fixed: Record<string, Errors>; fixed_on_matched: Record<string, Errors>; matched_fixed_indices: number[]};
+export type Evaluation = {status: string; reason: string | null; accounting: string; division_times: number[]; methods: Record<string, {event: {event_coverage: number; covered_events: number; events: number; tolerance_frames: number}; metrics: Scores | null; metrics_source: string | null}>};
+export type Condition = {key: string; sequence_id: string; budget: number; replay: string; evaluation: string};
+export type Manifest = {version: number; status: string; phase5_complete: boolean; protocol_sha256: string; conditions: Condition[]; source_hashes: Record<string, string>; gpu?: {source: string; note: string; case: {label: string; cpu_reference_median_ms: number; warm_device_interval_median_ms: number; single_render_caller_median_ms: number; max_absolute_error: number; profiled_batch_metadata: {device: string}}}};
+export type Gaussian = {center: number[]; covariance: number[]; radii: number[]; basis: number[]; amplitude: number};
+export type SceneFrame = {t: number; source_t: number; kind: 'fit' | 'forecast'; gaussians: Gaussian[]};
+export type SceneArchive = {version: number; units: string; frames: SceneFrame[]};
+export type ViewMode = 'spatial' | 'gaussians' | 'microscope';

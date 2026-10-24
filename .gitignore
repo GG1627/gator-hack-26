@@ -12,3 +12,7 @@ target/
 .env
 .env.*
 !.env.example
+node_modules/
+apps/web/public/demo/
+apps/web/.vite/
+*.tsbuildinfo

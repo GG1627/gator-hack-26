@@ -375,3 +375,93 @@ package-wide science hash; use the corresponding archived source for strict
 historical verification. The GPU implementation and native binary are unchanged.
 
 Do not commit raw datasets, credentials, or generated runs.
+
+## Local interactive replay (Phase 6)
+
+The React + TypeScript viewer consumes the existing closed Phase 5 artifacts.
+It does not resume Phase 5, fit models, execute policies, or recompute metrics.
+Both held-out embryos, budgets 27/54/89, fixed/image-change/random comparisons,
+and saved causal PHOTON Gaussian predictions are supported.
+
+From the repository root, export authentic local assets once:
+
+```powershell
+.venv/Scripts/python.exe -u scripts/build_phase6_assets.py
+.venv/Scripts/python.exe -u scripts/build_glimpse_spatial.py
+```
+
+This checks frozen source, closed-run and paused-checkpoint metric hashes, then
+projects the source volumes and renders saved full 3D Gaussian scenes on CPU.
+It can take several minutes. It writes only ignored `apps/web/public/demo/`;
+raw data, original run artifacts and scientific modules remain untouched.
+The exporter refuses an existing output directory. To regenerate, move the
+old export to another local directory first, or choose a fresh `--output`.
+An interrupted export has no `manifest.json` and is not usable by the viewer.
+
+With Node.js 22.12+ or 24 installed:
+
+```powershell
+cd apps/web
+npm ci
+npm test
+npm run dev -- --port 5173 --strictPort
+```
+
+Open <http://127.0.0.1:5173>. The **Glimpse** demo implements the selected
+[E / Contact design](docs/design/glimpse/round-2/README.md). The initial screen
+is explicitly labeled a recorded midpoint preview; the first **Play** starts
+at frame 0. Scrub, click an acquired thumbnail, or open **Experiment settings**
+to choose an embryo, budget and comparison. Both acquisition strips use the
+same moving 72-frame window and source clock. Sequence/budget changes pause
+playback, reset to frame 0 and close evaluation.
+
+**Spatial** shows a deterministic sample of actual acquired voxels, held until
+the next acquisition. **Gaussians** shows the saved model fit or causal forecast
+with full physical covariance: GPU-projected splats and shaded 2-sigma component
+contours. These contours are model geometry, not validated cell boundaries.
+**Microscope** and **Show acquired image** expose the policy's own last measured
+maximum projection. Drag/scroll or use arrow keys and +/- to inspect the 3D view;
+Home resets it. Missing 3D assets or WebGL retain the microscope fallback.
+
+The spatial exporter reads saved fits/forecasts without executing fitting or
+policies. It checks frozen hashes and exports physical XYZ micrometers. Source
+voxel sampling uses ZYX stride 1/3/3, first-image normalization, signal threshold
+0.2 and a deterministic cap of 12,000 points. Depth colors and transparency are
+display choices. This orthographic browser projection differs from the frozen
+CPU full-volume renderer used for scores; original CPU projections remain linked
+under **Research details**. See the [rendering contract](docs/design/glimpse/implementation.md).
+
+**Reveal evidence** explicitly opens evaluation-only images, annotations,
+differences and metric tables; **Close evidence** seals the display again.
+
+Image scores exist only for s2/B27 and s2/B54 and are labeled **first-pass /
+source rerender pending**. The other conditions show **pending**, not zero.
+All event audits are real: fixed sampling covered more annotated divisions than
+PHOTON in all six held-out conditions. Own-withheld and matched-target scores
+are separate. Capture savings are relative to imaging every source volume;
+fixed and PHOTON have equal image budgets. No biological benefit is measured.
+
+Build and serve without a science backend after export:
+
+```powershell
+npm run build
+npm run preview -- --port 4173 --strictPort
+```
+
+The build includes the local export. Keep generated microscopy assets out of
+Git; no hosted deployment is required. Dataset attribution and source JSON
+links are available under **Research details & provenance**. Missing exports
+produce a setup message; missing images produce an explicit error state.
+
+Exporter tests (from the repository root; authentic-export check requires assets):
+
+```powershell
+.venv/Scripts/python.exe -m pytest -q tests/phase6
+```
+
+The human ten-second comprehension check remains a Phase 6 acceptance gate.
+
+The UI bundles Three.js 0.186.1 and Manrope Variable 5.3.0; licenses are included
+under `apps/web/public/third-party/`. `apps/web/tests/browser-geometry.cjs` is a
+Playwright CLI `run-code --filename` fixture for a running dev preview: it checks
+the actual GPU shader against an independent analytic covariance projection.

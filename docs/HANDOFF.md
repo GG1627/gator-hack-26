@@ -5,8 +5,21 @@
 The user explicitly paused Phase 5 and authorized starting Phase 6 before its
 scientific gates finish. Finish no further scoring or full recomputation until
 the user resumes Phase 5. Phase 5 is **PAUSED / INCOMPLETE**, not verified.
-Phase 6 is authorized to start with authentic saved artifacts and clearly
-labeled partial/pending results; no Phase 6 UI work has started yet.
+Phase 6 is now in progress under renewed user authorization: `apps/web/`
+contains the local React/TypeScript replay viewer. `scripts/build_phase6_assets.py`
+exports display assets from authentic closed runs without resuming Phase5.
+The user approved the original playthrough, then requested a distinctive redesign
+and selected **Glimpse E / Contact**. That design is now implemented with an
+interactive Three.js specimen viewer, authentic voxel samples, saved Gaussian
+fits/forecasts, an acquired-image toggle and shared photographic contact strips.
+Run `scripts/build_glimpse_spatial.py` after the base export for the 3D assets;
+existing generated assets are available locally and ignored by Git. See
+`docs/design/glimpse/implementation.md` and README for the display/science contract.
+The formal unfamiliar-viewer ten-second comprehension
+criterion remains unrecorded; Phase6 is not marked fully complete.
+See BUILD_PHASES.md and README for current verification, local preview and
+remaining acceptance gates. The historical pause-checkpoint details below
+describe the state before this Phase6 work.
 
 Read AGENTS.md, PHOTON_SPEC.md, BUILD_PHASES.md and this handoff before coding.
 The user-approved sequencing exception is recorded in BUILD_PHASES.md; the
@@ -129,6 +142,15 @@ on these known held-out outcomes. GPT-6.1 Sol Medium is sufficient for routine
 frontend work; model choice remains manual.
 
 ## Manual Phase 5 resume - only when the user explicitly resumes it
+
+The user requested a standalone background runner. **`PHASE5_RUN.md`** now
+contains the PowerShell start/watch/stop instructions. `scripts/finish_phase5.py`
+runs resume scoring, ledger verification, full recomputation, report and case
+panels sequentially, stopping on failure. It appends progress/errors to
+`runs/phase5-runner/latest.log` and writes `status.json`; a Windows process lock
+rejects duplicate wrapper launches. No computation was launched while preparing
+these files. The guide explains restart granularity and that full recomputation
+restarts from the beginning. Frozen scientific scripts remain unchanged.
 
 From the existing workspace:
 

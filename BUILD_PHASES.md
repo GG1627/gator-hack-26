@@ -1,6 +1,6 @@
 # PHOTON — Living Build Plan and Test Gates
 
-> **Active checkpoint — 2026-10-24:** **Phase 5 PAUSED / INCOMPLETE at the user's request.** The evaluator and automatic stage orchestrator stopped via Ctrl+C; no scoring or full recomputation is running. All36 acquisition runs and all36 event audits are saved. Full-image first-pass scores exist for s2/B27 and s2/B54 only (12/36 runs;2/6 conditions). The user explicitly authorizes starting Phase6 before Phase5 passes, using authentic artifacts with partial/pending labels. Phase6 has not started in this checkpoint.
+> **Active checkpoint — 2026-10-24:** **Phase 5 PAUSED / INCOMPLETE at the user's request.** No scoring or full recomputation has resumed. All36 acquisition runs and event audits remain saved. Full-image first-pass scores exist for s2/B27 and s2/B54 only (12/36 runs;2/6 conditions). **Phase 6 is in progress under renewed user authorization:** local authentic-artifact viewer, display asset export and browser verification. All partial/pending labels and frozen Phase5 gates remain in force.
 
 > GatorHack V · 48-hour build · Started: 2026-10-23  
 > Project contract: [`PHOTON_SPEC.md`](./PHOTON_SPEC.md)  
@@ -40,7 +40,7 @@
 | 3 | PHOTON adaptive acquisition policy | ✅ Verified + refinement | 71 tests; paced/robust default; five-run s1 ablation; exact real rerun; causal/gap/budget checks |
 | 4 | New CUDA Rust scientific kernel | ✅ Verified | Native kernel;80 tests; real parity/fallback; measured timings/chart; CPU default |
 | 5 | Rigorous evaluation and reproducibility | ⏸ Paused / incomplete | 2/6 image conditions saved; full verification/recomputation pending |
-| 6 | Stunning interactive demonstration | ⬜ Not started; early start authorized | Use authentic artifacts and label partial/pending results |
+| 6 | Stunning interactive demonstration | 🔄 Implemented; user playthrough approved | User ran playback and approved appearance; automated checks pass; formal unfamiliar-viewer comprehension check remains open |
 | 7 | Final validation & submission | ⬜ Not started | Fresh-machine instructions, all evidence verified |
 | 8 | Stretch: 3D/PSF/multi-well/microscope adapter | ⬜ Optional | Only if all core gates passed |
 
@@ -421,26 +421,43 @@ The full recomputation intentionally revisits all saved source/scene targets as 
 
 **Suggested UI (Next.js + Tailwind)**
 
-- [ ] Above the fold: **"The microscope that knows when to look."** Subtitle **"See more. Illuminate less."**
-- [ ] Main comparison: conventional fixed schedule vs PHOTON, playback synced to the exact same recorded sequence and acquisition budget.
-- [ ] Large authentic fluorescent-cell images with **MEASURED**, **PREDICTED**, or **GROUND TRUTH (EVAL ONLY)** watermarks/labels.
-- [ ] Timelines: gray fixed-interval exposure ticks, distinctive PHOTON ticks, highlight annotated events **only in evaluation mode**.
-- [ ] Toggle **Reveal hidden frames**; show true withheld frames vs predicted states and differences.
-- [ ] Cards from actual JSON: `X / T` images, exposure proxy, event coverage if valid, reconstruction loss; show provenance.
-- [ ] Interactions that work: play, pause, scrub, policy/budget selection, replay/inspect decision rationale.
-- [ ] Include an explainer for why skip/acquire decisions happened and a simple legend.
-- [ ] Small "research mode" panel: Gaussian state/uncertainty map and measured GPU kernel benchmark; don't crowd the magic-moment UI.
+- [x] Above the fold: **"The microscope that knows when to look."** Subtitle **"See more. Illuminate less."**
+- [x] Main comparison: conventional fixed schedule vs PHOTON, playback synced to the exact same recorded sequence and acquisition budget.
+- [x] Large authentic fluorescent-cell images with **MEASURED**, **PREDICTED**, or **GROUND TRUTH (EVAL ONLY)** watermarks/labels.
+- [x] Timelines: gray fixed-interval exposure ticks, distinctive PHOTON ticks, highlight annotated events **only in evaluation mode**.
+- [x] Toggle **Reveal hidden frames**; show true withheld frames vs predicted states and differences.
+- [x] Cards from actual JSON: `X / T` images, exposure proxy, event coverage if valid, reconstruction loss; show provenance. Implemented as a comparison table.
+- [x] Interactions that work: play, pause, scrub, policy/budget selection, replay/inspect decision rationale.
+- [x] Include an explainer for why skip/acquire decisions happened and a simple legend.
+- [x] Small "research mode" panel: saved Gaussian state/component count, scalar heuristic uncertainty and measured GPU kernel benchmark; no invented uncertainty map.
 
 **Required tests**
 
 - [ ] A teammate unfamiliar with the algorithm can say what it does after watching 10 seconds.
-- [ ] UI updates faithfully to the selected authentic experiment (no hard-coded scores or fictional acquisition traces).
-- [ ] Skipped future frames are not exposed to the policy during simulated "live" execution; evaluation reveal is a distinct user action.
-- [ ] Dev/build commands work, no missing assets, animation stable on laptop, backend absence handled if using precomputed run results.
+- [x] UI updates faithfully to the selected authentic experiment (no hard-coded scores or fictional acquisition traces).
+- [x] Skipped future frames are not exposed to the policy during simulated "live" execution; evaluation reveal is a distinct user action. UI only views closed causal runs; no policy executes here.
+- [x] Dev/build commands work, no missing assets, animation stable on laptop, backend absence handled if using precomputed run results.
 
 **Demo gate:** Start page → press play → see PHOTON reduce light exposure → reveal withheld cells → show real measured comparison in under 30 seconds. Every visible number traceable to a run file.
 
-**Record:** URLs: _pending_ · Commands: _pending_ · Ten-second tester result: _pending_ · Bugs: _pending_
+**Implementation record — 2026-10-24 (in progress):**
+
+- Local React/Vite/TypeScript app in `apps/web/`, with a pinned npm lockfile. Static viewer of completed causal runs; no policy, fitting, annotation parsing or scoring executes in the browser. No hosted deployment.
+- `scripts/build_phase6_assets.py` validates all36 closed artifact ledgers, frozen implementation hashes and the paused checkpoint's approved metric hashes. It writes only ignored `apps/web/public/demo/`: real normalized volume MIPs, exact CPU-rendered saved3D Gaussian forecast MIPs, replay JSON, separate evaluation JSON, original source JSON copies and source hashes. Metric values are copied, never rescored. Manifest is written last; existing outputs are refused.
+- Implemented synchronized play/pause/scrub, budget/embryo/comparison selectors, held-measurement versus causal forecast switch, exposure timelines/tick inspection, recorded decision rationale, heuristic state/uncertainty, explicit reveal/hide evaluation, genuine metric tables and matched-target caveats, dataset attribution/source links and original measured CUDA benchmark. Pending image metrics are null with reasons. Equal-budget exposure proxy is compared with all-source imaging, not portrayed as a PHOTON advantage over fixed.
+- Design concept and tokens: `docs/design/phase6-{concept.png,design.md}`. Concept cells are illustrative and never shipped as scientific imagery; UI assets derive from actual source TIFFs and saved geometry. Responsive desktop/laptop/mobile layouts, focus states, reduced-motion rules and missing-data/image states included.
+- **Final automated verification:** production TypeScript/Vite build passed with complete exported assets;3 Node replay tests passed;6 Python exporter/integration/pixel tests passed in8.03s. All36 exported configs/traces and every approved metric/event field match original saved files; all frozen implementation hashes remain unchanged. Independently calculated actual TIFF projections (t1/269) and rerendered saved3D forecasts (t1/268) exactly match exported PNG pixels. This is display-asset validation, not Phase5 full metric recomputation.
+- Export complete:6 conditions/36 runs,540 authentic source-volume previews plus1280 saved causal forecast projections =1820 PNGs;88 original source JSON copies with hashes;128119505 bytes total. Raw images and run artifacts remain untouched and ignored; no exporter/controller/scorer processes left running after completion.
+- **Chromium QA:** official Playwright CLI, because browser inventory returned no surfaces. Passed all6 conditions, all comparison selectors, play/pause/scrub/tick inspection, hold/forecast toggle, explicit evaluation reveal/hide, selection resets, exact displayed event/MSE parity against JSON, historical CUDA timing, reduced motion and layouts at1440x1000/1366x768/390x844. No console errors, failed HTTP responses, missing images or mobile page overflow. Play is above the laptop fold. Setup message was verified with the manifest absent. Screenshot review fixed unintended tick-hitbox outlines; concept vs authentic implementation inspected. Initial browser assertions needed state-aware waits/role selectors; final actual-manifest flow passed without mocks.
+- **Timed demo gate:** default s2/B54 at12 source steps/s completed all270 source steps, then explicit reveal displayed the real evaluation table in **22.79s** in local Chromium. This measures the precomputed UI replay path, not scientific compute/GPU speed or biological benefit. Human ten-second comprehension remains untested.
+- Initial restricted-shell build/test attempts hit Windows child-process/temp permissions; authorized reruns passed. Dependency installation succeeded and exact installed versions are locked. No production deployment, scientific code modification, held-out tuning or resumption of Phase5 occurred.
+- Commands: root `.venv/Scripts/python.exe -u scripts/build_phase6_assets.py`; `cd apps/web`, `npm ci`, `npm test`, `npm run dev -- --port 5173 --strictPort`, `npm run build`. Local preview `http://127.0.0.1:5173/`. See README for standalone preview and regeneration instructions.
+- **User review — 2026-10-24:** The user reports running the playthrough and approves the appearance: "i ran the play through" and "it looks good to me". Human playback/visual review is accepted. This feedback does not document an unfamiliar viewer explaining the system after ten seconds, so that specific comprehension criterion remains open; no further UI changes requested.
+- **Open gate:** formal unfamiliar-viewer ten-second comprehension check remains unrecorded. Phase6 is not marked fully complete. Phase5 remains paused/incomplete; no new scientific claims, held-out tuning or full source metric recomputation.
+- **Design reset — 2026-10-24:** User selected **Glimpse** as the demo name and retained the Spatial/Gaussians/Microscope viewer ideas, then rejected the first three themes as generic/AI-looking. No redesign target is approved. Researched and visually inspected actual Eames Institute, FIELD.IO, Isomorphic Labs/Pentagram, Future Observatory and Arc Institute pages; screenshots, source links, inspection limits and proposed specimen-atlas identity are in `docs/design/glimpse/references/README.md`. Research/documentation only; existing UI and frozen scientific artifacts remain unchanged. Phase5 is still paused.
+- **Design round 2 — 2026-10-24:** User approved the research direction and particularly liked Isomorphic Labs' 3D presentation. Developed three related compositions (D Window, E Contact, F Study) with a light outlined layout, restrained type, sculptural Gaussian geometry and acquired-image contact strips. Mockups and scientific/interaction constraints: `docs/design/glimpse/round-2/README.md`. E is the recommended composition; user selection remains pending. Generated specimens are illustrative, never run evidence. No app or scientific code changed; Phase5 remains paused.
+
+**Record:** URL: `http://127.0.0.1:5173/` (local dev command above) · User playthrough/visual review: **approved** · Formal ten-second comprehension result: _pending_ · Browser QA: **passed**, three viewports/all6 conditions.
 
 ---
 
@@ -477,6 +494,58 @@ The full recomputation intentionally revisits all saved source/scene targets as 
 
 ## Decision log (update every phase)
 
+### 2026-10-24 — User-operated Phase 5 background runner
+
+Added `scripts/finish_phase5.py` and root `PHASE5_RUN.md` at the user's request
+before closing Codex/VS Code. The wrapper runs the existing frozen evaluate,
+verify, evaluate --recompute, report and failure-inspection commands, in order;
+stops on a failed exit; logs to `runs/phase5-runner/latest.log`; publishes stage/
+PID/state in `status.json`; and uses an OS-released Windows lock against duplicate
+wrapper launches. Completed first-pass groups are reused by the existing
+evaluator; full recomputation is repeated on a fresh wrapper launch.
+
+Verified `--dry-run` starts no evaluation; 3 runner tests passed in0.04s covering
+command order, paths with spaces, failure short-circuiting and side-effect-free
+dry-run behavior. `run_phase5.check_registration` passed after these additions:
+frozen scientific sources/protocol unchanged. **No Phase 5 computation was
+started.** User launch instructions explain standalone PowerShell, avoiding
+sleep, watching logs, stop/resume granularity and final scientific review.
+
+### 2026-10-24 — Glimpse E / Contact implementation
+
+The user selected E and authorized execution. The Glimpse wordmark, “A glimpse.
+Then a decision.” opening, panoramic three-mode viewer and paired contact strips
+supersede the earlier literal Phase 6 heading/two-panel presentation. The
+scientific specification, frozen PHOTON identifiers and evaluation criteria remain
+unchanged. Phase 5 remains paused; Phase 6's human comprehension gate stays open.
+
+Implemented in `apps/web/`: locally bundled Manrope/chalk/oxide identity,
+interactive physical-coordinate Three.js splats and 2-sigma model contours,
+authentic sampled acquired voxels, held-image toggle, keyboard/orbit/fullscreen,
+shared 72-frame contact window, explicit recorded preview (first Play rewinds to
+0), research provenance and evaluation reveal/close. Missing geometry/WebGL falls
+back to actual microscope images. No illustrative specimen asset enters the app.
+
+`scripts/build_glimpse_spatial.py` exports saved causal states and sampled source
+voxels without fitting, scheduling or scoring: 546 files, six conditions, 1,620
+model frames. Physical conversion, full covariance, sampling and file/source
+hashes are tested. Scientific paths remain frozen.
+
+Final checks: 9 Phase 6 Python tests passed in29.18s; 7 Node tests passed;
+TypeScript/Vite production build passed. Actual GPU shader passed three analytic
+129×129 projection comparisons (maximum alpha error1LSB, tolerance2). Chromium
+passed all six conditions and metric parity, playback/scrub/contact/image/mode/
+research/evidence/fullscreen interactions, and 1440×1000,1366×768,390×844 layouts;
+no normal-flow console errors or failed responses. WebGL-disabled/missing-spatial
+fallbacks passed. Full3D 270-step playback+reveal23.653s, resource counts bounded
+at5 geometries/5 programs. No new scientific performance claim follows.
+
+Accepted E and final browser screenshots were visually compared; actual model
+density intentionally differs from the illustrative mockup. Detailed fidelity,
+test evidence and limitations: `docs/design/glimpse/implementation.md`.
+Sol High recommendation for covariance work is no longer needed; Sol Medium
+suffices for remaining UI polish. Manual model switching was not assumed.
+
 | When | Decision | Why | Evidence / consequence |
 |---|---|---|---|
 | 2026-10-23 | Select **PHOTON**: adaptive light-budgeted microscopy | Clear scientific use, compelling demo, frontier 2026 Gaussian modeling / Rust GPU work | Initial concept / spec |
@@ -501,6 +570,7 @@ The full recomputation intentionally revisits all saved source/scene targets as 
 | 2026-10-24 11:28 -04:00 | Verify native CUDA Rust Gaussian renderer with conservative boundary repair and3D launch grid | Actual scientific computation must match CPU and work on full volumes, not just smoke fixtures |80 Python tests/native checks; real max error1.79e-7; exact CPU-equivalent acquisition traces |
 | 2026-10-24 11:28 -04:00 | Retain CPU default despite faster warmed GPU interval | Measured subprocess/context/JIT/files/transfer overhead makes every caller case slower | Real field85.68ms CPU,49.30ms device,5335.46ms full caller; raw samples/chart retained; no app-speedup claim |
 | 2026-10-24 | Pause Phase5 and allow Phase6 before its gate, at the user's explicit request | Continue building with authentic partial artifacts while retaining scientific gates | All36 trajectories/event audits saved; image scores2/6 conditions; evaluator/orchestrator stopped; full recomputation not started; manual resume skips completed summaries |
+| 2026-10-24 | Implement Phase6 as a static React/Vite viewer of closed runs | Local replay stays independent of paused science; no backend or cloud dependency | All36 configs/traces and actual metrics/event audits exported; full3D saved forecasts rendered for display only;6 exporter +3 replay tests/build/three-viewport Chromium checks pass. Human comprehension gate still pending |
 
 ## Experiment log template (append after every meaningful run)
 
