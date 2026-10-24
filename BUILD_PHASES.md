@@ -1,6 +1,6 @@
 # PHOTON — Living Build Plan and Test Gates
 
-> **Active checkpoint — 2026-10-24:** **Phase 5 PAUSED / INCOMPLETE at the user's request.** No scoring or full recomputation has resumed. All36 acquisition runs and event audits remain saved. Full-image first-pass scores exist for s2/B27 and s2/B54 only (12/36 runs;2/6 conditions). **Phase 6 is in progress under renewed user authorization:** local authentic-artifact viewer, display asset export and browser verification. All partial/pending labels and frozen Phase5 gates remain in force.
+> **Active checkpoint — 2026-10-24:** **Phase 5 manually resumed by the user; INCOMPLETE / NOT VERIFIED.** The standalone runner was observed at step1/5, PID55068, with evaluation progress t100/269. Check `runs/phase5-runner/status.json` and `latest.log` for current progress; do not start a duplicate evaluator or modify frozen science. Phase 6 Glimpse E / Contact is implemented and browser-verified; human comprehension remains open. Research-only next-step priorities and account-switch prompt: [`docs/GLIMPSE_ELEVATION_RESEARCH.md`](docs/GLIMPSE_ELEVATION_RESEARCH.md). Existing partial/pending frontend exports remain snapshots until explicitly refreshed.
 
 > GatorHack V · 48-hour build · Started: 2026-10-23  
 > Project contract: [`PHOTON_SPEC.md`](./PHOTON_SPEC.md)  
@@ -39,7 +39,7 @@
 | 2 | Gaussian observation model + predictions | ✅ Verified | Numerical/causality tests; real sparse prediction; post-hoc errors verified |
 | 3 | PHOTON adaptive acquisition policy | ✅ Verified + refinement | 71 tests; paced/robust default; five-run s1 ablation; exact real rerun; causal/gap/budget checks |
 | 4 | New CUDA Rust scientific kernel | ✅ Verified | Native kernel;80 tests; real parity/fallback; measured timings/chart; CPU default |
-| 5 | Rigorous evaluation and reproducibility | ⏸ Paused / incomplete | 2/6 image conditions saved; full verification/recomputation pending |
+| 5 | Rigorous evaluation and reproducibility | 🔄 User-launched background runner; incomplete | Check live runner status; full verification/recomputation and result review pending |
 | 6 | Stunning interactive demonstration | 🔄 Implemented; user playthrough approved | User ran playback and approved appearance; automated checks pass; formal unfamiliar-viewer comprehension check remains open |
 | 7 | Final validation & submission | ⬜ Not started | Fresh-machine instructions, all evidence verified |
 | 8 | Stretch: 3D/PSF/multi-well/microscope adapter | ⬜ Optional | Only if all core gates passed |
@@ -493,6 +493,18 @@ The full recomputation intentionally revisits all saved source/scene targets as 
 ---
 
 ## Decision log (update every phase)
+
+### 2026-10-24 — Research elevation and account-switch handoff
+
+Saved `docs/GLIMPSE_ELEVATION_RESEARCH.md`: research links, proposed uncertainty/
+division-risk/ensemble/CellSplat4D experiments, budget-demo idea, experiment gates,
+causality and model-selection guidance. The user agreed to investigate these;
+latest instruction remains documentation/discussion only, no code changes.
+Updated current handoff to distinguish the historical pause from the user-launched
+Phase 5 resume: PID55068 existed and log had reached t100/269 at this check.
+No evaluator was started or stopped, and no frozen file or result was modified.
+Prior source/UI/runner checkpoint `f77c213` is pushed to origin/main. New research
+directions are proposals, not implemented capabilities or measured improvements.
 
 ### 2026-10-24 — User-operated Phase 5 background runner
 

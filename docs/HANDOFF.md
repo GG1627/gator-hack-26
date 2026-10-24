@@ -1,10 +1,22 @@
-# PHOTON session handoff - paused Phase 5 checkpoint
+# PHOTON / Glimpse session handoff
 
 ## Current instruction and phase status
 
-The user explicitly paused Phase 5 and authorized starting Phase 6 before its
-scientific gates finish. Finish no further scoring or full recomputation until
-the user resumes Phase 5. Phase 5 is **PAUSED / INCOMPLETE**, not verified.
+**Latest account-switch instruction:** research/discussion only, no code changes.
+Read [GLIMPSE_ELEVATION_RESEARCH.md](GLIMPSE_ELEVATION_RESEARCH.md) for the agreed
+research priorities, paper links, causal constraints, experiment boundaries and
+a ready-to-paste continuation prompt. No proposed research improvement is implemented.
+
+**Phase 5 has been manually resumed by the user**, using the standalone background
+runner. At this handoff check, Python PID55068 existed, step1/5 was active, and the
+log had reached evaluation t100/269. Recheck `runs/phase5-runner/status.json` and
+`latest.log` on arrival; do not duplicate, stop or alter the running evaluation.
+Phase 5 remains **INCOMPLETE / NOT VERIFIED**. The older paused checkpoint and
+historical instructions below describe the earlier state and do not revoke the
+user's subsequent manual resume. See root `PHASE5_RUN.md` for operational commands.
+
+The user originally paused Phase 5 and authorized starting Phase 6 before its
+scientific gates finish.
 Phase 6 is now in progress under renewed user authorization: `apps/web/`
 contains the local React/TypeScript replay viewer. `scripts/build_phase6_assets.py`
 exports display assets from authentic closed runs without resuming Phase5.
@@ -33,9 +45,10 @@ scientific protocol and its completion gates have not changed.
 - Keep .venv/, .tools/, data/, runs/, caches, binaries and credentials ignored.
   Closing this session does not remove the existing local files. Do not
   force-add raw data or generated runs. Git source alone does not include them.
-- No PHOTON evaluator or stage orchestrator remains running. Ctrl+C to the
+- At the historical pause, no PHOTON evaluator or stage orchestrator remained running. Ctrl+C to the
   execution session stopped the process tree, and process absence was checked.
-  The automatic chain cannot launch subsequent scoring/recomputation stages.
+  That old automatic chain was stopped. The user has since launched the new
+  standalone runner; consult the current status at the top of this file.
 
 ## What finished
 
