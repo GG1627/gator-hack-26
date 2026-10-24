@@ -6,6 +6,10 @@
 Read [GLIMPSE_ELEVATION_RESEARCH.md](GLIMPSE_ELEVATION_RESEARCH.md) for the agreed
 research priorities, paper links, causal constraints, experiment boundaries and
 a ready-to-paste continuation prompt. No proposed research improvement is implemented.
+The research notes also record the proposed head-to-head demo: dense reference vs
+equal-budget fixed/adaptive schedules, prominent real capture counts, event/error
+results and explicit unmeasured cell health. No invented damage/death outcomes or
+claims of novelty for the whole established field; no frontend changes authorized.
 
 **Phase 5 has been manually resumed by the user**, using the standalone background
 runner. At this handoff check, Python PID55068 existed, step1/5 was active, and the

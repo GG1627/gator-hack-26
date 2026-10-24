@@ -494,6 +494,17 @@ The full recomputation intentionally revisits all saved source/scene targets as 
 
 ## Decision log (update every phase)
 
+### 2026-10-24 — Head-to-head demonstration clarification
+
+Updated elevation notes with the user's requested comparison discussion. Proposed
+270-volume reference vs54-volume fixed vs54-volume adaptive distinguishes 80%
+capture reduction against every-frame imaging (both sparse schedules) from the
+unproven value of adaptive timing at equal budgets. Documented that replay provides
+no measured health/death/damage outcomes and cannot support invented biological
+comparisons. Added prior-work links (2022 event-driven acquisition,2026 hybrid-EDA)
+and accurate contribution positioning. Documentation only; no UI/science changes
+or interference with the user-run evaluation.
+
 ### 2026-10-24 — Research elevation and account-switch handoff
 
 Saved `docs/GLIMPSE_ELEVATION_RESEARCH.md`: research links, proposed uncertainty/

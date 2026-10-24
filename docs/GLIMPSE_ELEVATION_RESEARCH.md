@@ -162,6 +162,66 @@ without requiring judges to know what Gaussian covariance or CUDA means.
 
 ## Experiment integrity and implementation gates
 
+### Head-to-head demo discussion — 2026-10-24
+
+The user requested a clearer fixed-versus-Glimpse story, prominent image counts,
+and discussion of cell health. **Discussion/documentation only; no UI changes.**
+
+**Product objective:** spend the imaging budget when observations are most useful.
+The aspiration is to retain useful biological information with fewer acquisitions,
+or retain more useful information at the same acquisition count. Fewer images alone
+can be achieved by any sparse fixed schedule; the adaptive timing needs its own proof.
+
+Proposed three-column evidence presentation, using the existing B54 condition:
+
+| Strategy | Acquired source volumes | Reduction against every-frame capture | Purpose |
+|---|---:|---:|---|
+| Every-frame reference | 270/270 | 0% | Dense source recording/reference, not a separately conducted biological arm |
+| Fixed timing | 54/270 | 80% | Sparse baseline at equal budget |
+| Glimpse adaptive | 54/270 | 80% | Test whether different acquisition timing retains more useful information |
+
+Those counts are actual schedule counts; 80% is arithmetic, not a measured health
+benefit. One acquisition is a complete 41-plane source volume in this dataset;
+predicted frames and repeated playback of a held image are not additional captures.
+Do not say Glimpse takes 80% fewer images *than fixed* in this comparison.
+
+Below counts, reveal real annotated-event coverage and reconstruction errors with
+provenance, missing/pending states and matched-target qualifications. Current event
+audits favor fixed in all six conditions. Do not choose a false winner, manufacture
+missed events or blur the fixed images to make the adaptive view look better.
+An eventual equal-quality comparison across budgets is another possible experiment;
+it requires measured curves and a predefined quality criterion, not an assumed gain.
+
+**Cell health is not measured.** Do not invent damaged/dead cells, a survival count,
+health percentage, or differential scan deterioration. Both displayed schedules
+subsample the same pre-recorded specimen; replay cannot create separate biological
+outcomes. Under the equal-per-volume-dose assumption, fixed and adaptive at B54 have
+the same total exposure-count proxy. Timing effects on viability are unknown here.
+Actual optical dose also depends on illumination settings and acquisition protocol.
+
+If the motivation needs an explainer, use a separate clearly labeled educational
+illustration of potential light-exposure risks with literature attribution. Any
+hypothetical simulation must display its assumptions and simulated status throughout;
+do not mingle fictional damage with experimental evidence. Preferred demo metric:
+“Acquisition-count exposure proxy”; health panel, if present: “Not measured.”
+
+**Positioning:** event-driven microscopy is an established research area, with
+[event-driven acquisition demonstrated in 2022](https://www.nature.com/articles/s41592-022-01589-x)
+and [hybrid-EDA published in 2026](https://www.nature.com/articles/s41467-025-68168-4).
+Do not claim the problem has never been addressed or that we invented adaptive
+microscopy. Our contribution must be the implemented causal Gaussian-based
+scheduler, verified CUDA Rust computation, transparent benchmark and any separately
+validated improvement. Their combination does not establish first-of-its-kind status.
+
+Suggested aspiration copy: **“Spend observations where they matter.”**
+Supporting factual copy: “Glimpse uses a predictive Gaussian model to choose when
+to acquire the next microscopy volume. Compare its recorded choices with fixed
+timing at the same image budget, then reveal what each schedule captured.”
+
+Before frontend implementation, select the comparison condition, verify source
+counts/metrics and decide whether to show both the dense reference and sparse fixed
+baseline. Preserve original source pixels and visible scientific limitations.
+
 - s1 is development data. s2/s3 outcomes have already been inspected; they cannot
   become fresh untouched tests for a revised controller. Declare reuse explicitly
   and obtain an independently held-out sequence for a new generalization claim.
