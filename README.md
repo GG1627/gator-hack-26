@@ -330,6 +330,48 @@ binary/code versions. All truth reads happen after replay closure. Detailed
 [kernel contract and limits](docs/cuda-rust-kernel.md), including the fixed
 full-volume launch-grid failure and CPU repair behavior, are documented.
 
-Do not commit raw datasets, credentials, or generated runs. Local datasets and
-audit artifacts have been downloaded. No held-out adaptive-policy benchmark or biological
-benefit has been established.
+## Held-out scientific evaluation (Phase 5)
+
+**Paused / incomplete by user request:** all36 acquisition trajectories and
+event audits are saved; image scoring is complete for s2/B27 and s2/B54 only.
+Global verification and full source recomputation have not started. See the
+[current checkpoint and manual resume instructions](docs/HANDOFF.md).
+Phase6 may start early with authentic artifacts labeled partial/pending.
+Do not launch further scoring automatically.
+
+The [frozen evaluation plan](docs/phase5-protocol.md) uses s1 for development
+and reserves s2/s3 for independent evaluation. Complete their source windows
+with the existing downloader before validating and freezing a new benchmark:
+
+```powershell
+.venv/Scripts/python.exe scripts/download_mskcc.py --sequence s2 --workers 4
+.venv/Scripts/python.exe scripts/download_mskcc.py --sequence s3 --workers 4
+.venv/Scripts/python.exe scripts/run_phase5.py validate-data
+.venv/Scripts/python.exe scripts/run_phase5.py freeze
+.venv/Scripts/python.exe -u scripts/run_phase5.py acquire
+.venv/Scripts/python.exe -u scripts/run_phase5.py evaluate
+.venv/Scripts/python.exe scripts/run_phase5.py verify
+.venv/Scripts/python.exe -u scripts/run_phase5.py evaluate --recompute
+.venv/Scripts/python.exe scripts/report_phase5.py
+```
+
+The default output is ignored `runs/phase5/`. Freeze refuses to overwrite an
+existing protocol. Acquisition can resume completed, hash-checked trajectories;
+partial outputs require inspection. Evaluation starts after all36 runs close.
+It writes trusted `benchmark.json`, per-run metrics/error sums and a standalone
+chart/report; full recomputation uses saved causal scenes and source volumes,
+without executing policies. The report's card data is checked directly against
+the trusted JSON. No Phase6 UI is implemented by these commands.
+
+Three budgets27/54/89, two embryos, all three random seeds and raw-hold/held-fit/
+Gaussian forecast estimators remain visible. Random shares capture counts but
+has no adaptive gap constraint. Reconstruction target-set caveats and event
+coverage definitions are explicit in the protocol. No biological phototoxicity
+benefit is established by capture counts.
+
+Historical GPU verification scripts enforce the science/binary hashes recorded
+in their audit snapshots. Phase5 adds scientific source files, changing the
+package-wide science hash; use the corresponding archived source for strict
+historical verification. The GPU implementation and native binary are unchanged.
+
+Do not commit raw datasets, credentials, or generated runs.

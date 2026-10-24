@@ -1,14 +1,16 @@
 # PHOTON — Living Build Plan and Test Gates
 
+> **Active checkpoint — 2026-10-24:** **Phase 5 PAUSED / INCOMPLETE at the user's request.** The evaluator and automatic stage orchestrator stopped via Ctrl+C; no scoring or full recomputation is running. All36 acquisition runs and all36 event audits are saved. Full-image first-pass scores exist for s2/B27 and s2/B54 only (12/36 runs;2/6 conditions). The user explicitly authorizes starting Phase6 before Phase5 passes, using authentic artifacts with partial/pending labels. Phase6 has not started in this checkpoint.
+
 > GatorHack V · 48-hour build · Started: 2026-10-23  
 > Project contract: [`PHOTON_SPEC.md`](./PHOTON_SPEC.md)  
-> **Current status:** **Phase 4 + CUDA latency audit verified (2026-10-24 12:43 -04:00).**85 Python tests, native validation/format checks and independent artifact verification pass. Opt-in persistent CUDA worker and vectorized host packing improve dense small-output rendering end to end; current real-volume predictions remain faster on CPU. Actual controller decisions/fitting stay CPU. Full270-step causal replay reproduces54 acquisitions, every decision and final state; max prediction difference1.79e-7. Eight-size cold/warm/transfer/full-call median/p95 report and six actual prediction probes complete. CPU stays default. Phase5 independent scientific evaluation is next; no biological benefit or whole-experiment speedup claimed.
+> **Prior verified milestone:** **Phase 4 + CUDA latency audit verified (2026-10-24 12:43 -04:00).**85 Python tests, native validation/format checks and independent artifact verification pass. Opt-in persistent CUDA worker and vectorized host packing improve dense small-output rendering end to end; current real-volume predictions remain faster on CPU. Actual controller decisions/fitting stay CPU. Full270-step causal replay reproduces54 acquisitions, every decision and final state; max prediction difference1.79e-7. Eight-size cold/warm/transfer/full-call median/p95 report and six actual prediction probes complete. CPU stays default. Phase5 is now paused/incomplete by user request; no biological benefit or whole-experiment speedup claimed.
 
 > Additional CUDA check: official SAXPY example exited 0; all 32 GPU results matched CPU assertions exactly.
 
 > **CUDA latency follow-up complete:** Original Phase4 bridge timings below remain historical evidence. See the additional audit record and [full latency report](docs/cuda-latency-audit.md) for current behavior, reproduction commands, measured crossovers and limitations.
 
-> **Account-switch handoff:** `docs/HANDOFF.md` records the continuation prompt, frozen science, local artifacts and Phase5 gates. Source/tests/lockfiles/docs are checkpointed on `main` at `GG1627/gator-hack-26`; historical "untracked/no HEAD" notes describe the earlier verification sessions. Raw datasets, environments, binaries and generated runs remain ignored and available in this existing workspace. Phase5 has not started.
+> **Account-switch handoff:** `docs/HANDOFF.md` records the continuation prompt, frozen science, local artifacts and Phase5 gates. Source/tests/lockfiles/docs are checkpointed on `main` at `GG1627/gator-hack-26`; historical "untracked/no HEAD" notes describe the earlier verification sessions. Raw datasets, environments, binaries and generated runs remain ignored and available in this existing workspace. Phase5 is paused/incomplete; Phase6 early start is explicitly authorized; see the checkpoint below.
 
 ## Operating instructions for Codex (read first)
 
@@ -37,12 +39,12 @@
 | 2 | Gaussian observation model + predictions | ✅ Verified | Numerical/causality tests; real sparse prediction; post-hoc errors verified |
 | 3 | PHOTON adaptive acquisition policy | ✅ Verified + refinement | 71 tests; paced/robust default; five-run s1 ablation; exact real rerun; causal/gap/budget checks |
 | 4 | New CUDA Rust scientific kernel | ✅ Verified | Native kernel;80 tests; real parity/fallback; measured timings/chart; CPU default |
-| 5 | Rigorous evaluation and reproducibility | ⬜ Not started | Honest same-budget comparison, exportable runs |
-| 6 | Stunning interactive demonstration | ⬜ Not started | 10-second intelligible live before/after |
+| 5 | Rigorous evaluation and reproducibility | ⏸ Paused / incomplete | 2/6 image conditions saved; full verification/recomputation pending |
+| 6 | Stunning interactive demonstration | ⬜ Not started; early start authorized | Use authentic artifacts and label partial/pending results |
 | 7 | Final validation & submission | ⬜ Not started | Fresh-machine instructions, all evidence verified |
 | 8 | Stretch: 3D/PSF/multi-well/microscope adapter | ⬜ Optional | Only if all core gates passed |
 
-> **Status convention:** `⬜ Not started` / `🔄 In progress` / `✅ Verified` / `⚠️ Blocked (fallback recorded)`. If a phase is partially done, keep it "In progress" and explain exactly what remains.
+> **Status convention:** `⬜ Not started` / `🔄 In progress` / `⏸ Paused (user request)` / `✅ Verified` / `⚠️ Blocked (fallback recorded)`. A paused or partially completed phase has not passed its gate.
 
 ---
 
@@ -334,23 +336,82 @@ Selected **full-caller median / p95 ms** (kernel-only timing is not used for the
 
 **Tasks**
 
-- [ ] Run fixed, seeded random, adaptive (and heuristic if available) under the **same `B`**, dataset sequences, and repeated seeds as appropriate.
+- [x] Run fixed, seeded random, adaptive (and heuristic if available) under the **same `B`**, dataset sequences, and repeated seeds as appropriate.
 - [ ] Compute acquisition count, dose proxy, withheld-frame reconstruction MAE/MSE (and SSIM if well-defined) with masks/normalization documented.
-- [ ] Where real lineage/event labels are available, compute event coverage within a **predeclared** ±`k`-frame tolerance. Do not derive eval-time target events from unseen frames and feed them into the controller.
-- [ ] Evaluate multiple budgets (suggested 10%, 20%, 33% of time points where constraints allow) and more than one sequence or seed.
+- [x] Where real lineage/event labels are available, compute event coverage within a **predeclared** ±`k`-frame tolerance. Do not derive eval-time target events from unseen frames and feed them into the controller.
+- [x] Evaluate multiple budgets (suggested 10%, 20%, 33% of time points where constraints allow) and more than one sequence or seed.
 - [ ] Export `config.json`, `decisions.jsonl`, `metrics.json`, figures/plots and version metadata for every run.
 - [ ] Inspect failure cases: missed divisions, false event alerts, cases where uniform sampling beats us; document them.
 
 **Required tests**
 
-- [ ] Same-budget rule asserted automatically for every policy comparison.
-- [ ] No annotations available → `event_coverage = null` with reason, not zero or fabricated result.
+- [x] Same-budget rule asserted automatically for every policy comparison.
+- [x] No annotations available → `event_coverage = null` with reason, not zero or fabricated result.
 - [ ] Metrics exactly reproducible from run artifacts and fixed seeds.
 - [ ] Recompute benchmark from withheld data in evaluator and verify UI cards match generated JSON.
 
 **Demo gate:** There is one trusted benchmark JSON and one chart comparing fixed versus PHOTON, with clear caveats, **whether it wins or loses**. If there is no improvement, investigate honest tuning only on development sequences, then rerun a held-out evaluation; don't tune on a displayed test trace.
 
-**Record:** Files: _pending_ · Commands: _pending_ · Datasets/seeds/budgets: _pending_ · Actual scores: _pending_ · Limitations: _pending_
+**Incremental record (2026-10-24; evaluation outcomes not yet computed):**
+
+- Inspected clean `main`, all primary documents and existing ignored evidence. Baseline `.venv/Scripts/python.exe -m pytest -q`: **85 passed in56.64s**. No GPU setup or kernel changes.
+- s1 remains development; initial s2/s3 image counts were five sampled volumes each (including out-of-window399). Existing `download_mskcc.py --sequence s2/s3 --workers 4` CRC-checked resumable downloads running, logs `runs/phase5-download-s{2,3}.log`. Full window validation is pending.
+- Added protocol/staged runner and independent statistic/ledger checks in `photon/benchmark.py`, `scripts/run_phase5.py`, `scripts/report_phase5.py`, `docs/phase5-protocol.md`. Reuse existing causal scene recorder/evaluator; explicit scope, provenance and text timeline added. Controller/model/GPU implementations unchanged; CPU default retained.
+- Predeclared plan: s2/s3 first270, B27/54/89, fixed/PHOTON/image-change plus random seeds7/42/2026 (36 trajectories), event tolerance+/-1, first-acquisition normalization, truth>0.1 offline foreground, own/common/pairwise-fixed targets, forecast/held-Gaussian/raw-hold. Random is equal-count but retains unconstrained gaps. Full source rerender and direct card-to-JSON checks planned. No held-out selection/tuning.
+- Targeted `.venv/Scripts/python.exe -m pytest -q services/science/tests/test_benchmark.py services/science/tests/test_development.py`: **19 passed in9.24s**. Controlled cases cover no extra acquisition reads, future perturbation, exact-budget feasibility, random determinism, missing labels, matched targets, tampered ledgers/metrics and exact source/scene recomputation without policy calls. Compilation check passed.
+- Full pre-freeze suite: **93 passed in84.50s**, stdout `runs/phase5-tests-before-freeze.log`; `pip check` clean. Includes a complete controlled36-run staged pipeline, exact full source recomputation, chart/card generation and closed-file tamper rejection. An earlier integration run reached its final tamper assertion but hit the source-hash guard because source was edited concurrently; no real held-out outcome was involved. Stable-source rerun passed. Real data validation/freeze/acquire/evaluate/verify/full-recompute/report stages are queued in `runs/phase5-pipeline.log`, stopping on any nonzero exit.
+- Final source before real registration: **93 passed in81.47s**, `runs/phase5-tests-registered-source.log`. Added independent vectorized event arithmetic, exact seed/schedule/controller/exposure checks and sign-correct win/loss selection. Missing-label report/plot/card behavior also tested (null, never fabricated zero). `inspect_phase5_failures.py` exports explicitly post-hoc measured/predicted/eval-only MIP panels after verification; source scores remain full3D. No scientific model, controller or GPU changes.
+- **Data/freeze gates passed, 2026-10-24 13:30 -04:00:** s2/s3 each270 decoded41x512x512 uint16 volumes, all selected images and main annotations match source ZIP CRCs. Image bytes5849610913 /5849623218; window0..269,75s, XYZ0.15/0.15/0.75um, extra399 samples excluded. Full archive MD5 not claimed. `runs/phase5-data-validation.json`; source hashes s2 `d5dfabc8f2a7446c0a937cf41ec9ce9a189b76e74fe2481c5ca922fc6fa91a47`, s3 `efefbed147e1f67c2991eb577a7667fe42244bb62698f03f0f5f8364aaaf4587`.
+- **Registered before outcomes:** `runs/phase5/protocol.json` SHA256 `7e675b6569a82dbf8fff4ac59fbcaf950e7f4dd21d1e3a5b6bd08a861a794b73`; CRC-checked frozen source ZIP `ed21533fecf4533b2d8b5d94f2656eb88040dc97a33e75a0a7ad0c02d7ff8067`. Exact controller/fit/tracking settings, all source/test/runner hashes, data fingerprints, Git HEAD/dirty state and dependency versions captured. Acquisition started after registration, no held-out scores computed yet. Implementation/protocol remain immutable for this matrix.
+- **Acquisition gate passed, 2026-10-24 14:22 -04:00:** all36 trajectories closed under the registered settings,2040 whole-volume captures total, exact B27/54/89 per method/condition. CPU default; all PHOTON/image-change inter-capture/terminal gap checks passed. `runs/phase5/all-trajectories-closed.json`, immutable per-run `closed.json` hashes, configs/states/scenes/traces/timelines. All trajectories completed before the first outcome-scoring stage. Source-integrity QA decodes full windows in trusted loaders before controllers run; only acquired observations reach controllers. The stdout sentence about no withheld reads refers to replay loops, not that separate QA. Offline scientific scoring has started; metrics/recomputation gates remain open.
+- **Post-closure event-only audit:** `runs/phase5/event-audit.json`, same registered protocol, all36 closed-file hashes and budgets checked before labels; canonical helper agrees with independent nearest-capture vector arithmetic. Fixed beats PHOTON on event coverage in all6 conditions. At B27/54/89: s2 fixed176/352/557 of560 versus PHOTON140/325/544; s3 fixed150/348/558 of567 versus PHOTON131/332/546. Deficits36/27/13 and19/16/12 events respectively. All random/image-change results retained in the audit. This is +/-1 source-frame retrospective coverage, not classifier recall. No held-out tuning or controller changes; full-volume reconstruction metrics and their full source recomputation remain pending.
+- **Temporal failure inspection:** `runs/phase5/event-failure-audit.json`. At B54 both embryos have fixed capture101 versus PHOTON97/102 around daughter frame100: fixed covers11 s2 divisions (mother IDs2414,2416,2417,2427,2437,2439,2444,2445,2446,2447,2448) and7 s3 divisions (2485,2486,2500,2510,2513,2548,2551) that PHOTON misses at the declared+/-1 tolerance. PHOTON covers161 clock timestamps versus fixed160 here, yet fewer labeled divisions, showing the temporal allocation/phase issue. At B89 both embryos: PHOTON261 covered clock timestamps versus fixed265, terminal ages5 versus0. These are descriptive post-hoc failure cases; no timing offsets/parameters were tuned to test outcomes.
+- **First full-image condition scored (source rerender still pending):** s2/B27 all6 methods/243 withheld targets each; all-method common147, fixed/PHOTON paired common218. Paired raw-hold MSE PHOTON0.006764643617763716 vs fixed0.006863698660076684; own-withheld raw MSE PHOTON0.006847225856928299 vs fixed0.006734736906330803, a ranking reversal. PHOTON own Gaussian forecast0.02026135787759542, held Gaussian0.02019323943815579, raw0.006847225856928299. Independent `verify_statistics` passed every sum/aggregate/target/seed/controller/exposure/event field; events equal the separate event audit. `runs/phase5/mskcc_confocal_s2/b27/early-verification.json`. Do not interpret conditional matched-target gains as general accuracy superiority; full matrix/full source recomputation remain pending. Observed available RAM below1GB during this CPU pass; no timing-speedup claim or scientific approximation introduced.
+- Gates still open: finish/validate held-out windows; freeze hashed protocol before outcomes; complete matrix; score and independently recompute source metrics; inspect chart/failure cases; final tests. No scientific wins/losses claimed; Phase6 remains unstarted. Model recommendation issued: GPT-6.1 Sol High for evaluation design (manual switch not confirmed).
+
+---
+
+### User-requested pause checkpoint — 2026-10-24
+
+**Stopped:** Ctrl+C to the running execution session stopped the evaluator and its automatic orchestrator. Confirmed no PHOTON scoring/orchestrator Python processes remain. No later scoring stage or full recomputation was launched. Scientific source, parameters, frozen protocol/source archive, raw datasets, acquisition traces and original logs are unchanged.
+
+**Finished and preserved:**
+
+- Complete validated s1 development and s2/s3 held-out windows; s2/s3 selected270 volumes each are decoded and source-ZIP-CRC checked.
+- Registered protocol/source snapshot and all36 closed acquisition trajectories,9720 decisions,2040 simulated whole-volume captures. Current frozen source hashes and all36 closed-file hash ledgers rechecked successfully during checkpointing; source ZIP CRC passes.
+- Event-only coverage audit for all36 runs/all6 conditions, independently cross-checked with nearest-capture arithmetic. Fixed covers more events than PHOTON in every condition; all random/image-change scores and temporal failure cases retained.
+- Full-image **first-pass** MAE/MSE and foreground errors for all6 methods at **s2/B27 and s2/B54**:12 scored runs,2754 withheld-frame rows, all3 estimators. Configs/traces/timelines/scenes/state remain available for every run. Completed metrics/evaluation files match their saved group summaries structurally.
+- s2/B27 additionally passed independent scalar accounting/target/seed/controller/budget/event checks (`early-verification.json`). s2/B54 has not yet had that independent accounting pass. Neither condition has been independently rerendered from source a second time.
+- Latest full tests on the frozen scientific implementation: **93 passed in81.47s**. No scientific implementation changes occurred after registration or during this pause.
+
+**Incomplete / unverified:**
+
+- **s2/B89** was interrupted; the last logged source frame was100. Actual in-memory progress beyond that marker is unknown. No image metric/evaluation export or per-frame checkpoint exists for this condition; it resumes from0.
+- **s3/B27, s3/B54, s3/B89** image scoring has not started. Their event audits and all acquisition artifacts are complete.
+- No complete `benchmark.json`, global `verification.json`, full `recomputation.json`, generated report/chart/cards, or post-hoc image case panels exist. Full source recomputation has **not started**. Phase5 remains incomplete and must not be presented as verified.
+
+**Checkpoint files:** `runs/phase5/checkpoint.json` is the machine-readable partial-results index. `runs/phase5-paused-checkpoint.zip` is a CRC-checked17348462-byte copy of every current Phase5 run artifact, frozen source/protocol, data validation, pipeline/download logs and final pre-registration test log; raw microscopy files are excluded and remain in `data/`. ZIP SHA256 `42a73b943ae4e1ea5b7ebbaf8f03c466af36ef6e1d355cfe45a9e4c04ce68b05`; sidecar `runs/phase5-paused-checkpoint-manifest.json`. Original artifacts and `runs/phase5-pipeline.log` are retained in place. These directories remain Git-ignored.
+
+**Manual resume only after the user resumes Phase5:**
+
+```powershell
+.venv/Scripts/python.exe -u scripts/run_phase5.py evaluate
+```
+
+This checks the frozen implementation/closed artifacts, reuses both completed summaries, and scores only s2/B89 and the three s3 conditions. It reconstructs evaluation ledgers from saved acquisition indices without running policies or refitting models. Initial TIFF integrity loading is repeated; completed scoring groups are skipped. Do not re-freeze, download, reacquire, or restart the old automatic stage chain.
+
+After those four groups finish, run these **separate, explicitly manual** completion steps when authorized to finish Phase5:
+
+```powershell
+.venv/Scripts/python.exe scripts/run_phase5.py verify
+.venv/Scripts/python.exe -u scripts/run_phase5.py evaluate --recompute
+.venv/Scripts/python.exe scripts/report_phase5.py
+.venv/Scripts/python.exe scripts/inspect_phase5_failures.py
+```
+
+The full recomputation intentionally revisits all saved source/scene targets as a verification gate. No command above was launched during checkpointing. Keep registered scientific modules, science tests, protocol and frozen runner/report scripts unchanged so resume hash checks continue to pass. Phase6 can add frontend files outside those frozen paths.
+
+**User-approved sequencing exception:** Phase6 may start while Phase5 is paused. Use actual saved configurations, timelines, causal scenes and the12 completed image metric exports plus the36-run event audit. Label image scores **first-pass / source rerender pending**, other image scores **pending / not computed**, and the whole benchmark **partial**. Use null plus reasons for pending values; preserve own-versus-matched target caveats and measured/predicted/eval-only labels. This authorization changes phase order, not the frozen methodology or Phase5 completion criteria. No UI work has begun here.
 
 ---
 
@@ -439,6 +500,7 @@ Selected **full-caller median / p95 ms** (kernel-only timing is not used for the
 | 2026-10-24 10:11 -04:00 | Report fixed's wins and Gaussian losses alongside the refinement | Different target sets change rankings; Gaussian appearance/motion remains weak | Fixed334 events and lower own-target raw error; selected lower common-target raw error; no overall/held-out/biological advantage claimed |
 | 2026-10-24 11:28 -04:00 | Verify native CUDA Rust Gaussian renderer with conservative boundary repair and3D launch grid | Actual scientific computation must match CPU and work on full volumes, not just smoke fixtures |80 Python tests/native checks; real max error1.79e-7; exact CPU-equivalent acquisition traces |
 | 2026-10-24 11:28 -04:00 | Retain CPU default despite faster warmed GPU interval | Measured subprocess/context/JIT/files/transfer overhead makes every caller case slower | Real field85.68ms CPU,49.30ms device,5335.46ms full caller; raw samples/chart retained; no app-speedup claim |
+| 2026-10-24 | Pause Phase5 and allow Phase6 before its gate, at the user's explicit request | Continue building with authentic partial artifacts while retaining scientific gates | All36 trajectories/event audits saved; image scores2/6 conditions; evaluator/orchestrator stopped; full recomputation not started; manual resume skips completed summaries |
 
 ## Experiment log template (append after every meaningful run)
 

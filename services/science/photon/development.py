@@ -61,7 +61,8 @@ class ClosedDevelopmentRun:
     calibration: IntensityCalibration
 
 
-def record_development_run(sequence, policy, budget, seed, label, output):
+def record_development_run(sequence, policy, budget, seed, label, output, *,
+                           scope="exploratory s1 development ablation, not held-out evidence"):
     """Trusted runner: no withheld reads, no annotations, no scoring feedback."""
     output = Path(output)
     if output.exists():
@@ -105,7 +106,7 @@ def record_development_run(sequence, policy, budget, seed, label, output):
               "photon_code_sha256": science_hash(), "model_version": "causal-moment-gaussian-v1",
               "normalization": model.calibration.to_dict(), "numpy_version": np.__version__,
               "scipy_version": scipy.__version__, "hardware": {"kernel_backend": "cpu", "gpu": None},
-              "scope": "exploratory s1 development ablation, not held-out evidence"}
+              "scope": scope, "provenance": getattr(sequence, "provenance", {})}
     if hasattr(policy, "configuration"):
         extra = policy.configuration()
         extra.pop("state_after_run", None)
@@ -115,6 +116,8 @@ def record_development_run(sequence, policy, budget, seed, label, output):
     (output/"state.json").write_text(json.dumps(model.state_dict(), indent=2), encoding="utf-8")
     save_scenes(output/"forecasts.npz", forecasts, len(metadata.shape))
     save_scenes(output/"held_scenes.npz", held, len(metadata.shape))
+    (output/"timeline.txt").write_text("".join("|" if t in record.acquired_indices else "."
+                                               for t in range(metadata.frame_count))+"\n", encoding="utf-8")
     return ClosedDevelopmentRun(label, oracle, record, forecasts, held, model.calibration)
 
 
