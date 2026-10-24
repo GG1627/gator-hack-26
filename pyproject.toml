@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "photon-microscopy"
+version = "0.0.1"
+description = "Causal adaptive microscopy acquisition research prototype"
+requires-python = ">=3.11"
+dependencies = ["numpy>=2.2,<3", "scipy>=1.15,<2", "tifffile>=2025", "pillow>=11"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10", "matplotlib>=3.9,<4"]
+
+[tool.setuptools.packages.find]
+where = ["services/science"]
+
+[tool.pytest.ini_options]
+testpaths = ["services/science/tests"]
+addopts = "-ra"
