@@ -38,6 +38,27 @@
       "name": "architecture.svg",
       "bytes": 3773,
       "sha256": "375388da3a25e359ba4fff5c4c31931e3cbeecc23af34d6608f415e9455e17d8"
+    },
+    {
+      "name": "real-microscopy.png",
+      "bytes": 198677,
+      "sha256": "ba6a4276cc47dd35dfc01fa8e74832a458ff355b45c23c2772bd9ba64c462725"
     }
-  ]
+  ],
+  "realMicroscopy": {
+    "source": "apps/web/public/demo/images/mskcc_confocal_s2/179.png",
+    "dataset": "MSKCC-CONFOCAL",
+    "doi": "10.5281/zenodo.6460303",
+    "license": "CC BY 4.0",
+    "licenseSource": "Existing dataset audit and exported microscopy manifest",
+    "sequence": "mskcc_confocal_s2",
+    "sourceFrame": 179,
+    "processing": "Maximum-intensity projection of the normalized 3D volume, rounded to 8-bit for display; unchanged copy of existing export",
+    "creators": [
+      "Anthony Santella",
+      "Ismar Kovacevic",
+      "Zhirong Bao",
+      "Peter Hirsch"
+    ]
+  }
 }

@@ -11,6 +11,7 @@ files, so the product overview does not depend on an external image host.
 | `results.png` | The same featured comparison after replay completion, showing the saved run metrics and their assumptions. |
 | `cuda-rust.png` | Fresh capture of the actual compute slide with tile 6 selected. The Gaussian input diagram is explanatory; the intensity panel is saved native renderer output. The 12.7× statistic has its own dense-workload scope. |
 | `architecture.svg` | Repository-authored explanatory diagram. It describes data access and execution responsibilities; it is not an experimental result or a screenshot. |
+| `real-microscopy.png` | Real fluorescent nuclei in a C. elegans embryo, MSKCC-CONFOCAL sequence 02, source frame 179. Unchanged copy of `apps/web/public/demo/images/mskcc_confocal_s2/179.png`: maximum-intensity projection of the normalized 3D volume, rounded to an 8-bit display. This belongs to the separate real-data evaluation. |
 
 The still captures use a 1600 × 1000 Chromium viewport and the actual application
 at source revision `9043f13a1fefb49db3595c7ba363c5610bb0c5d5`. They preserve existing
@@ -19,5 +20,10 @@ errors; `manifest.json` records file hashes and the source recording hash.
 
 The capybara illustration and local Manrope font already form the application
 identity. Font and library notices are in `apps/web/public/third-party/`.
-No publication figures or third-party microscopy images were copied into these
-README screenshots. Real-data attribution remains in the root README and dataset audit.
+The real microscopy image is from the [MSKCC-CONFOCAL author deposit](https://zenodo.org/records/6460303),
+Anthony Santella, Ismar Kovacevic, Zhirong Bao, and Peter Hirsch, **CC BY 4.0**,
+as recorded in the existing dataset audit and exported manifest.
+
+Suggested project-media caption:
+
+> Real-data evaluation: fluorescent nuclei in a C. elegans embryo. MSKCC-CONFOCAL, sequence 02, frame 179; normalized maximum-intensity projection. Dataset: Santella, Kovacevic, Bao & Hirsch, CC BY 4.0. https://doi.org/10.5281/zenodo.6460303
