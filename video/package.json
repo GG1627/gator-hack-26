@@ -1,7 +1,7 @@
 {
   "name": "video",
   "version": "1.0.0",
-  "description": "My Remotion video",
+  "description": "Isolated Peekaboo Devpost film production",
   "repository": {},
   "license": "UNLICENSED",
   "engines": {
@@ -9,7 +9,12 @@
   },
   "private": true,
   "dependencies": {
+    "@remotion/captions": "4.0.538",
     "@remotion/cli": "4.0.538",
+    "@remotion/fonts": "4.0.538",
+    "@remotion/install-whisper-cpp": "4.0.538",
+    "@remotion/media": "4.0.538",
+    "@remotion/transitions": "4.0.538",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "remotion": "4.0.538"
@@ -26,9 +31,24 @@
     "dev": "remotion studio",
     "build": "remotion bundle",
     "upgrade": "remotion upgrade",
-    "lint": "eslint src && tsc"
+    "lint": "eslint src && tsc",
+    "test": "node --test tests/*.test.mjs",
+    "preview:stills": "node scripts/preview.mjs",
+    "preview:film": "node scripts/preview-film.mjs",
+    "capture:app": "node scripts/capture-app.mjs",
+    "film:evidence": "node scripts/collect-film-evidence.mjs",
+    "film:check": "node scripts/check-film.mjs",
+    "doctor": "node --env-file-if-exists=.env scripts/doctor.mjs",
+    "audio:generate": "node --env-file-if-exists=.env scripts/generate-audio.mjs",
+    "audio:process": "node --env-file-if-exists=.env scripts/audio-process.mjs",
+    "whisper:setup": "node scripts/whisper.mjs setup",
+    "captions": "node scripts/whisper.mjs transcribe",
+    "render:proof": "remotion render src/index.ts Peekaboo-StyleStudy out/style-study.mp4 --codec=h264"
   },
   "allowScripts": {
     "esbuild": false
+  },
+  "overrides": {
+    "zod": "4.6.6"
   }
 }

@@ -1,0 +1,22 @@
+{
+  "@id": "Your Breath",
+  "@type": "MusicRecording",
+  "name": "Your Breath",
+  "genre": "Corporate Music",
+  "byArtist": "Eugenio Mininni",
+  "duration": "PT3M56S",
+  "url": "https://assets.mixkit.co/music/634/634.mp3",
+  "waveformUrl": "https://assets.mixkit.co/music/634/634-waveform.json",
+  "copyrightNotice": "Mixkit Stock Music Free License",
+  "encodingFormat": "audio/mpeg",
+  "isAccessibleForFree": true,
+  "license": "https://mixkit.co/license/#musicFree",
+  "publisher": {
+    "@id": "https://mixkit.co/#organization"
+  },
+  "datePublished": "2020-01-28",
+  "sourcePage": "https://mixkit.co/free-stock-music/tag/technology/",
+  "permission": "https://mixkit.co/license/#musicFree",
+  "sha256": "8b837348a9c5b61f359fa458af832bfe957f3da461039af3ba0ba6c6f467ed0e",
+  "modifications": "Excerpt used in video with fades, volume envelope and ducking. Original audio retained locally."
+}

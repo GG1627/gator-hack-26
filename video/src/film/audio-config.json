@@ -1,0 +1,38 @@
+{
+  "music": {
+    "src": "audio/licensed/mixkit-your-breath.normalized.m4a",
+    "gain": 0.24
+  },
+  "effects": [
+    {
+      "src": "audio/generated/sfx-preview-v2/reveal.mp3",
+      "from": 708,
+      "duration": 54,
+      "gain": 0.17
+    },
+    {
+      "src": "audio/generated/sfx-preview-v2/transition.mp3",
+      "from": 793,
+      "duration": 21,
+      "gain": 0.1
+    },
+    {
+      "src": "audio/generated/sfx-preview-v2/capture.mp3",
+      "from": 1194,
+      "duration": 15,
+      "gain": 0.1
+    },
+    {
+      "src": "audio/generated/sfx-preview-v2/transition.mp3",
+      "from": 3107,
+      "duration": 21,
+      "gain": 0.1
+    },
+    {
+      "src": "audio/generated/sfx-preview-v2/reveal.mp3",
+      "from": 5227,
+      "duration": 54,
+      "gain": 0.15
+    }
+  ]
+}

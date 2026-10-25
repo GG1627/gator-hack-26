@@ -1,0 +1,51 @@
+{
+  "sources": [
+    {
+      "path": "apps/web/public/demo/controlled/budget32/manifest.json",
+      "sha256": "d6ba8bad249bee5bb9b25a5a11a27c1a36956285081c8f67951dd8b750b0129b"
+    },
+    {
+      "path": "apps/web/public/demo/controlled/budget32/evidence.json",
+      "sha256": "ac985a9fba94f33601033cc95d1f1ac7afe511c2de5fee48ce3527c1deae0a27"
+    },
+    {
+      "path": "runs/cuda-latency-audit/matrix/latency.json",
+      "sha256": "ff816795ed010802b975ed55c601b2ec8a090d47fad94972715ee68434084178"
+    }
+  ],
+  "featured": {
+    "key": "304-precursor",
+    "frames": 240,
+    "adaptiveImages": 32,
+    "fixedImages": 40,
+    "adaptiveCovered": 4,
+    "fixedCovered": 1,
+    "events": 4,
+    "eventFrames": [
+      140,
+      173,
+      186,
+      194
+    ],
+    "toleranceFrames": 1,
+    "selection": "Selected after evaluation",
+    "exposureReduction": 0.19999999999999996
+  },
+  "benchmark": {
+    "cpuMs": 2913.979799952358,
+    "gpuMs": 230.11979996226728,
+    "ratio": 12.662881683497739,
+    "cpuPath": "cases.4.cpu_warm.median_ms",
+    "gpuPath": "cases.4.worker_warm_full.median_ms",
+    "components": 10000,
+    "width": 64,
+    "height": 64,
+    "scope": "Warmed persistent full rendering call; startup excluded"
+  },
+  "abrupt": {
+    "key": "304-abrupt",
+    "adaptiveCovered": 0,
+    "fixedCovered": 1,
+    "events": 4
+  }
+}

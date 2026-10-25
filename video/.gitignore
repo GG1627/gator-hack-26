@@ -5,3 +5,15 @@ dist
 
 # Ignore the output video from Git but not videos you import into src/.
 out
+renders/
+.cache/
+whisper.cpp/
+.env.*
+!.env.example
+public/audio/generated/
+public/audio/licensed/*.m4a
+public/audio/licensed/*.mp3
+public/audio/licensed/*.wav
+public/recordings/*
+!public/recordings/.gitkeep
+*.log

@@ -1,0 +1,12 @@
+{
+  "voice": {"modelId": "eleven_multilingual_v2", "stability": 0.5, "similarityBoost": 0.75, "style": 0.15, "speed": 0.95},
+  "narration": {
+    "hook": "What if a microscope knew when to look?",
+    "reveal": "Meet Peekaboo. Software that chooses when a microscope takes its next image."
+  },
+  "effects": {
+    "reveal": {"text": "A soft airy cinematic reveal, warm and minimal, no voice, no music, no loud impact.", "durationSeconds": 2},
+    "capture": {"text": "One gentle optical shutter tick, precise and delicate, no harsh click, no voice or music.", "durationSeconds": 0.5},
+    "transition": {"text": "A subtle short airy whoosh for a calm scientific product film, no impact or music.", "durationSeconds": 1}
+  }
+}

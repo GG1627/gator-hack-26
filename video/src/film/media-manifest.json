@@ -1,0 +1,119 @@
+{
+  "status": "Recorded application sources; narration and music pending",
+  "appRevision": "9043f13a1fefb49db3595c7ba363c5610bb0c5d5",
+  "recordings": [
+    {
+      "id": "demo",
+      "src": "recordings/demo-304.mp4",
+      "trim": 90,
+      "duration": 660,
+      "durationSeconds": 32.13,
+      "sha256": "5e7bfe9c712ac0500c34b40b8d2316138fbdabf01862d20faece401de4f4a3d9",
+      "sourceInFrame": 90,
+      "sourceOutFrame": 750,
+      "fps": 30,
+      "width": 1920,
+      "height": 1080,
+      "playbackRate": 1,
+      "capture": {
+        "recordedAt": "2026-10-25T16:16:19.229Z",
+        "cues": {
+          "play": 2.126,
+          "completed": 22.272,
+          "end": 30.285
+        },
+        "errors": []
+      }
+    },
+    {
+      "id": "result",
+      "src": "recordings/featured-result.mp4",
+      "trim": 90,
+      "duration": 105,
+      "durationSeconds": 12.67,
+      "sha256": "95467389acd9057277169554dc89c209f5783cffb723ba86982d45808838b21d",
+      "sourceInFrame": 90,
+      "sourceOutFrame": 195,
+      "fps": 30,
+      "width": 1920,
+      "height": 1080,
+      "playbackRate": 1,
+      "capture": {
+        "recordedAt": "2026-10-25T16:20:30.720Z",
+        "cues": {
+          "results": 0.518,
+          "end": 7.545
+        },
+        "errors": []
+      }
+    },
+    {
+      "id": "gaussians",
+      "src": "recordings/gaussian-controls.mp4",
+      "trim": 90,
+      "duration": 150,
+      "durationSeconds": 13.13,
+      "sha256": "291a5f44778896646e28ef9e185f9ed636c075240a7a05ac9b8faa28203b6a86",
+      "sourceInFrame": 90,
+      "sourceOutFrame": 240,
+      "fps": 30,
+      "width": 1920,
+      "height": 1080,
+      "playbackRate": 1,
+      "capture": {
+        "recordedAt": "2026-10-25T16:23:24.678Z",
+        "cues": {
+          "default": 2.007,
+          "shape": 2.15,
+          "end": 11.351
+        },
+        "errors": []
+      }
+    },
+    {
+      "id": "cuda",
+      "src": "recordings/cuda-tiles.mp4",
+      "trim": 90,
+      "duration": 159,
+      "durationSeconds": 13.53,
+      "sha256": "5e4068db7b888f4be82983b92849e7d28d614cdb0d54718db14a845732a0c696",
+      "sourceInFrame": 90,
+      "sourceOutFrame": 249,
+      "fps": 30,
+      "width": 1920,
+      "height": 1080,
+      "playbackRate": 1,
+      "capture": {
+        "recordedAt": "2026-10-25T16:16:53.470Z",
+        "cues": {
+          "default": 2.526,
+          "tile": 2.745,
+          "end": 9.252
+        },
+        "errors": []
+      }
+    },
+    {
+      "id": "abrupt",
+      "src": "recordings/abrupt-304.mp4",
+      "trim": 150,
+      "duration": 189,
+      "durationSeconds": 12.53,
+      "sha256": "e44220402433adbeb0e2ff480992546f624ab4dee005e586361f154be37016f3",
+      "sourceInFrame": 150,
+      "sourceOutFrame": 339,
+      "fps": 30,
+      "width": 1920,
+      "height": 1080,
+      "playbackRate": 1,
+      "capture": {
+        "recordedAt": "2026-10-25T16:17:09.546Z",
+        "cues": {
+          "results": 1.245,
+          "end": 8.246
+        },
+        "errors": []
+      }
+    }
+  ]
+}

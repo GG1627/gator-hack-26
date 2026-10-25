@@ -1,0 +1,43 @@
+{
+  "appRevision": "9043f13a1fefb49db3595c7ba363c5610bb0c5d5",
+  "recording": {
+    "source": "video/public/recordings/demo-304.mp4",
+    "sha256": "5e7bfe9c712ac0500c34b40b8d2316138fbdabf01862d20faece401de4f4a3d9",
+    "startSeconds": 3,
+    "durationSeconds": 22,
+    "playbackRate": 1,
+    "gifFps": 8
+  },
+  "assets": [
+    {
+      "name": "hero.png",
+      "bytes": 237042,
+      "sha256": "d3cfed76470d4329b6579f71227d3da8d4a19c64aae0d8e4c07f50a208babd2c"
+    },
+    {
+      "name": "demo.gif",
+      "bytes": 1823255,
+      "sha256": "e1eb5ea6d094591f5fa00ab77e856ec92c04fb70e8b017c97e648544940e22d9"
+    },
+    {
+      "name": "comparison.png",
+      "bytes": 92746,
+      "sha256": "28b9bfb34e9cb856905d44509b9141398719f425d6056094f4bfe0fd79d258a9"
+    },
+    {
+      "name": "results.png",
+      "bytes": 81682,
+      "sha256": "c83e4f0df6fc2259a3514de6959b9283a053277cb97cb584375b6e24a9be59d9"
+    },
+    {
+      "name": "cuda-rust.png",
+      "bytes": 120558,
+      "sha256": "a5f646a710f458b23d49dfb0d83e839e728c9c0c33ebe3436a94bd5a9a484783"
+    },
+    {
+      "name": "architecture.svg",
+      "bytes": 3773,
+      "sha256": "375388da3a25e359ba4fff5c4c31931e3cbeecc23af34d6608f415e9455e17d8"
+    }
+  ]
+}

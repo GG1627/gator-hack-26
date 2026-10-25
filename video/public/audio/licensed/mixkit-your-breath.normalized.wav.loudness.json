@@ -1,0 +1,15 @@
+{
+  "firstPass": {
+    "input_i": "-9.53",
+    "input_tp": "0.38",
+    "input_lra": "9.40",
+    "input_thresh": "-19.95",
+    "output_i": "-14.78",
+    "output_tp": "-1.50",
+    "output_lra": "5.90",
+    "output_thresh": "-25.08",
+    "normalization_type": "dynamic",
+    "target_offset": "-1.22"
+  },
+  "secondPass": "{\r\n\t\"input_i\" : \"-9.49\",\r\n\t\"input_tp\" : \"0.00\",\r\n\t\"input_lra\" : \"9.40\",\r\n\t\"input_thresh\" : \"-19.91\",\r\n\t\"output_i\" : \"-15.96\",\r\n\t\"output_tp\" : \"-6.47\",\r\n\t\"output_lra\" : \"9.40\",\r\n\t\"output_thresh\" : \"-26.37\",\r\n\t\"normalization_type\" : \"linear\",\r\n\t\"target_offset\" : \"-0.04\"\r\n}"
+}

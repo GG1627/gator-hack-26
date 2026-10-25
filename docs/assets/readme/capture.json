@@ -1,0 +1,13 @@
+{
+  "capturedAt": "2026-10-25T18:11:39.788Z",
+  "viewport": [
+    1600,
+    1000
+  ],
+  "errors": [],
+  "states": {
+    "comparison": "seed 304, precursor, adaptive32/fixed40, source frame195, past-only divisions enabled",
+    "results": "same selected run after completion",
+    "cuda": "compute slide, tile6 selected"
+  }
+}
