@@ -1,0 +1,102 @@
+{
+  "verified": true,
+  "rows": 72,
+  "source_hashes_match": true,
+  "source_images_and_all_metrics_recomputed": true,
+  "traces_and_budgets_match": true,
+  "summary_sha256": "d6f7d22ecf711b28c4c513dc79b429d568a2bf4573932f43b3a2b93377f2cf6c",
+  "source_zip_sha256": "43e06c297134b62bdb4ee95cc51c77cc1151b0e2a203569eeb7b1a6b48538f26",
+  "totals_covered_events_captures": {
+    "development/precursor/adaptive32": [
+      7,
+      8,
+      64
+    ],
+    "development/precursor/fixed32": [
+      2,
+      8,
+      64
+    ],
+    "development/precursor/fixed40": [
+      2,
+      8,
+      80
+    ],
+    "development/abrupt/adaptive32": [
+      2,
+      8,
+      64
+    ],
+    "development/abrupt/fixed32": [
+      2,
+      8,
+      64
+    ],
+    "development/abrupt/fixed40": [
+      2,
+      8,
+      80
+    ],
+    "development/quiet/adaptive32": [
+      0,
+      0,
+      64
+    ],
+    "development/quiet/fixed32": [
+      0,
+      0,
+      64
+    ],
+    "development/quiet/fixed40": [
+      0,
+      0,
+      80
+    ],
+    "prospective/precursor/adaptive32": [
+      23,
+      24,
+      192
+    ],
+    "prospective/precursor/fixed32": [
+      8,
+      24,
+      192
+    ],
+    "prospective/precursor/fixed40": [
+      11,
+      24,
+      240
+    ],
+    "prospective/abrupt/adaptive32": [
+      4,
+      24,
+      192
+    ],
+    "prospective/abrupt/fixed32": [
+      8,
+      24,
+      192
+    ],
+    "prospective/abrupt/fixed40": [
+      11,
+      24,
+      240
+    ],
+    "prospective/quiet/adaptive32": [
+      0,
+      0,
+      192
+    ],
+    "prospective/quiet/fixed32": [
+      0,
+      0,
+      192
+    ],
+    "prospective/quiet/fixed40": [
+      0,
+      0,
+      240
+    ]
+  },
+  "elapsed_seconds": 12.820377900032327
+}

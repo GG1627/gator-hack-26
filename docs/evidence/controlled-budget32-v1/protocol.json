@@ -1,0 +1,36 @@
+{
+  "scope": "synthetic only; separate unequal-budget comparison",
+  "development_seeds": [
+    7,
+    42
+  ],
+  "prospective_seeds": [
+    301,
+    302,
+    303,
+    304,
+    305,
+    306
+  ],
+  "conditions": [
+    "precursor",
+    "abrupt",
+    "quiet"
+  ],
+  "frames": 240,
+  "adaptive_budget": 32,
+  "fixed_budgets": [
+    32,
+    40
+  ],
+  "fixed_phase": 0,
+  "tolerance_frames": 1,
+  "hard_limit_seconds": 120,
+  "source_sha256": {
+    "scripts/probe_controlled_budget.py": "b96800c12dbbc74d987b11b6e24fe1a16198dee99efb5dc792aff69752eb75da",
+    "docs/CONTROLLED_BUDGET_PROBE.md": "976ec371355ee45ab4a71ec6ea2a10acf968c4382762d96c0f331bceb96a4bf0",
+    "experiments/controlled/__init__.py": "a8a1631c2794af46556e271d1be759b0d3560e6fe954ac2282f3943ba09438c7",
+    "experiments/controlled/benchmark.py": "cbea5bf379eb6803b1f2b0ac3905d426ebb110f9828500f5c71f72c7723bb2e9",
+    "experiments/controlled/event_focus.py": "dab80dba39e2ab9791e6e05b97c01d5db1404900f6050b368cdedeb240162f43"
+  }
+}

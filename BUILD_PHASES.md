@@ -1,6 +1,6 @@
 # PHOTON — Living Build Plan and Test Gates
 
-> **Active checkpoint — 2026-10-24:** **Phase 5 manually resumed by the user; INCOMPLETE / NOT VERIFIED.** The standalone runner was observed at step1/5, PID55068, with evaluation progress t100/269. Check `runs/phase5-runner/status.json` and `latest.log` for current progress; do not start a duplicate evaluator or modify frozen science. Phase 6 Glimpse E / Contact is implemented and browser-verified; human comprehension remains open. Research-only next-step priorities and account-switch prompt: [`docs/GLIMPSE_ELEVATION_RESEARCH.md`](docs/GLIMPSE_ELEVATION_RESEARCH.md). Existing partial/pending frontend exports remain snapshots until explicitly refreshed.
+> **Active checkpoint — 2026-10-25:** **Phase 5 complete and verified.** All five runner stages finished; full source recomputation matches exactly across six conditions / 36 runs. Fresh ledger verification passed; chart and representative failure panels reviewed. Results and limitations: [`docs/PHASE5_RESULTS.md`](docs/PHASE5_RESULTS.md). Approved controlled synthetic demo remains primary. The real-data browser archive is still an older partial snapshot pending exporter integration. Phase 6 human comprehension and Phase 7 final submission/reproducibility work remain open. Historical paused/running/incomplete Phase 5 notes below are superseded.
 
 > GatorHack V · 48-hour build · Started: 2026-10-23  
 > Project contract: [`PHOTON_SPEC.md`](./PHOTON_SPEC.md)  
@@ -13,6 +13,62 @@
 > **Account-switch handoff:** `docs/HANDOFF.md` records the continuation prompt, frozen science, local artifacts and Phase5 gates. Source/tests/lockfiles/docs are checkpointed on `main` at `GG1627/gator-hack-26`; historical "untracked/no HEAD" notes describe the earlier verification sessions. Raw datasets, environments, binaries and generated runs remain ignored and available in this existing workspace. Phase5 is paused/incomplete; Phase6 early start is explicitly authorized; see the checkpoint below.
 
 ## Current authorized branch — bounded controlled event focus
+
+**Latest statistic copy — 2026-10-25:** replaced the final-specimen/cell-health
+card with **Less imaging light:20% versus fixed**, calculated from32/40 captures
+and explicitly assuming equal illumination per capture. Copy connects light
+exposure to phototoxic stress without claiming measured stress/health improvement.
+Equal32/32 and40/40 comparisons correctly show0% less light versus fixed. Build,
+seven Node tests and targeted Chromium checks pass; desktop/mobile screenshots
+captured, mobile inspected, no overflow at1440/390/320. No scientific job or
+experimental values changed. Checker: `.tools/glimpse-light-stat-check.cjs`.
+
+**Latest lower-capture mode — 2026-10-25:** user authorized featuring a favorable
+measured lower-budget scenario. New default **Fewer images** replays the saved32/40
+probe; featured seed304 captures4/4 divisions versus fixed1/4 with32 versus40
+images (20% fewer). Selection is post-evaluation and disclosed; all six seeds and
+three conditions remain available, including failures. Cohort precursor23/24 vs11/24;
+abrupt4/24 vs11/24. Fixed32 comparator and original40/40 mode retained. No algorithm,
+source event time, frozen science or experimental metric changed. This shows a
+chosen budget, not minimum-capture discovery or measured health improvement.
+
+New bounded exporter rechecked72 rows and source hashes, regenerated display
+images, rendered36 actual CUDA Rust batches with sampled CPU parity (max1.19e-7),
+and completed26.7s internally. Portable57-file display export5.8MB included in Git.
+Build/seven Node tests pass;14 focused Python tests pass in3.15s. Chromium checks
+all18 selected-run metric combinations, both modes/comparators, cross-mode resets,
+evidence gating, past-only images, model view, reduced motion and five widths;
+default full completion22.069s. Desktop/mobile screenshots inspected. Frozen Phase5
+registration passes. Details: [docs/LOWER_CAPTURE_DEMO.md](docs/LOWER_CAPTURE_DEMO.md).
+This supersedes older statements that the lower-budget probe is not in the UI.
+
+**Latest simplification — 2026-10-25:** user wanted the capture animation retained
+and recent-capture strips removed. Removed the strips/component/styles; constant
+shared-clock replay is now default. Optional acquisition pauses are labeled as a
+viewing aid. Added concise same-duration/same-budget comparison copy. No changes
+to scientific timing, acquisition counts, metrics or image assets. Production build,
+seven Node tests and the targeted Chromium loop pass: shared canvas/timeline clock,
+retained capture sweep, result gating, full playback21.091s, replay/reset, reduced
+motion, five widths320–1440 and adverse/quiet cases. Desktop/mobile screenshots
+visually inspected. This supersedes the thumbnail/guided-default notes below.
+
+**Latest capture-clarity update — 2026-10-25:** retained approved styling and
+original40-image runs. Added guided capture dwell/sweep, explicit held-image versus
+exposure status, four clickable acquired-image thumbnails, last-capture timeline
+marker, Quick playback, and end-result exposure bars with equal-dose assumptions.
+Final guided completion28.919s; full Chromium interaction loop passes at five widths
+320–1440, including keyboard, reduced motion, accurate adverse/quiet cases and
+evaluation gating. Build, seven Node tests and six focused Python tests pass.
+Frozen Phase5 registration passes. No cell-health percentage is inferred.
+QA: [docs/DEMO_CAPTURE_CLARITY.md](docs/DEMO_CAPTURE_CLARITY.md).
+
+Separately predeclared and ran an unchanged-controller32-image probe:72 comparisons
+in16.3s, independently checked from regenerated images and saved records in12.8s.
+New seeds301–306: precursor adaptive32 covers23/24 versus fixed40's11/24 and
+fixed32's8/24; abrupt adaptive32 covers4/24 versus11/24 and8/24 respectively.
+This does not establish all-event retention at the lower budget. All seeds/failures
+are preserved; original demo budget remains40. Portable evidence and decision:
+[docs/CONTROLLED_BUDGET_RESULTS.md](docs/CONTROLLED_BUDGET_RESULTS.md).
 
 Latest frontend direction: the controlled replay is now the primary demo. Reaching
 frame 239 automatically stops playback, opens the saved evidence and scrolls to a
@@ -78,7 +134,7 @@ sources or claiming completion of Phase 5 / the Phase 6 comprehension gate.
 | 2 | Gaussian observation model + predictions | ✅ Verified | Numerical/causality tests; real sparse prediction; post-hoc errors verified |
 | 3 | PHOTON adaptive acquisition policy | ✅ Verified + refinement | 71 tests; paced/robust default; five-run s1 ablation; exact real rerun; causal/gap/budget checks |
 | 4 | New CUDA Rust scientific kernel | ✅ Verified | Native kernel;80 tests; real parity/fallback; measured timings/chart; CPU default |
-| 5 | Rigorous evaluation and reproducibility | 🔄 User-launched background runner; incomplete | Check live runner status; full verification/recomputation and result review pending |
+| 5 | Rigorous evaluation and reproducibility | ✅ Verified | 36 runs; exact full-source recomputation; ledger/card checks; chart/failure review; browser archive refresh tracked separately |
 | 6 | Stunning interactive demonstration | 🔄 Implemented; user playthrough approved | User ran playback and approved appearance; automated checks pass; formal unfamiliar-viewer comprehension check remains open |
 | 7 | Final validation & submission | ⬜ Not started | Fresh-machine instructions, all evidence verified |
 | 8 | Stretch: 3D/PSF/multi-well/microscope adapter | ⬜ Optional | Only if all core gates passed |
@@ -376,22 +432,34 @@ Selected **full-caller median / p95 ms** (kernel-only timing is not used for the
 **Tasks**
 
 - [x] Run fixed, seeded random, adaptive (and heuristic if available) under the **same `B`**, dataset sequences, and repeated seeds as appropriate.
-- [ ] Compute acquisition count, dose proxy, withheld-frame reconstruction MAE/MSE (and SSIM if well-defined) with masks/normalization documented.
+- [x] Compute acquisition count, dose proxy, withheld-frame reconstruction MAE/MSE (and SSIM if well-defined) with masks/normalization documented.
 - [x] Where real lineage/event labels are available, compute event coverage within a **predeclared** ±`k`-frame tolerance. Do not derive eval-time target events from unseen frames and feed them into the controller.
 - [x] Evaluate multiple budgets (suggested 10%, 20%, 33% of time points where constraints allow) and more than one sequence or seed.
-- [ ] Export `config.json`, `decisions.jsonl`, `metrics.json`, figures/plots and version metadata for every run.
-- [ ] Inspect failure cases: missed divisions, false event alerts, cases where uniform sampling beats us; document them.
+- [x] Export `config.json`, `decisions.jsonl`, `metrics.json`, figures/plots and version metadata for every run.
+- [x] Inspect failure cases: missed divisions, false event alerts, cases where uniform sampling beats us; document them.
 
 **Required tests**
 
 - [x] Same-budget rule asserted automatically for every policy comparison.
 - [x] No annotations available → `event_coverage = null` with reason, not zero or fabricated result.
-- [ ] Metrics exactly reproducible from run artifacts and fixed seeds.
-- [ ] Recompute benchmark from withheld data in evaluator and verify UI cards match generated JSON.
+- [x] Metrics exactly reproducible from run artifacts and fixed seeds.
+- [x] Recompute benchmark from withheld data in evaluator and verify UI cards match generated JSON. All 36 generated report cards verified; the browser's older partial export still needs a separate refresh.
 
 **Demo gate:** There is one trusted benchmark JSON and one chart comparing fixed versus PHOTON, with clear caveats, **whether it wins or loses**. If there is no improvement, investigate honest tuning only on development sequences, then rerun a held-out evaluation; don't tune on a displayed test trace.
 
 **Incremental record (2026-10-24; evaluation outcomes not yet computed):**
+
+**Completion review — 2026-10-25:** all five user-launched stages completed at
+00:47:23 EDT. Global and six group recomputation records pass exact source/per-frame
+checks; all 36 report cards match benchmark JSON. Fresh
+`.venv/Scripts/python.exe scripts/run_phase5.py verify` exited 0, validating all
+ledgers, targets, counts, aggregates and exports. Chart and s2/B54 win/loss panels
+visually reviewed; 12 post-hoc panels retained. Fixed wins event coverage and
+own-withheld raw-hold MSE in all six conditions; PHOTON wins matched raw-hold MSE
+in five. Gaussian forecast loses to raw hold in all 36 runs. No biological claim,
+held-out tuning, new full-volume run or frozen source modification. Full review:
+[`docs/PHASE5_RESULTS.md`](docs/PHASE5_RESULTS.md). Browser archive remains partial;
+Phase 6 comprehension and Phase 7 work remain open. Earlier records below are historical.
 
 - Inspected clean `main`, all primary documents and existing ignored evidence. Baseline `.venv/Scripts/python.exe -m pytest -q`: **85 passed in56.64s**. No GPU setup or kernel changes.
 - s1 remains development; initial s2/s3 image counts were five sampled volumes each (including out-of-window399). Existing `download_mskcc.py --sequence s2/s3 --workers 4` CRC-checked resumable downloads running, logs `runs/phase5-download-s{2,3}.log`. Full window validation is pending.

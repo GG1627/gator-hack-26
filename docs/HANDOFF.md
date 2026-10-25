@@ -1,5 +1,94 @@
 # PHOTON / Glimpse session handoff
 
+**Latest UI statistic:** the final-specimen/cell-health card is now **Less imaging
+light:20% versus fixed**, derived from32/40 captures with equal illumination per
+capture assumed. Copy mentions phototoxic stress without assigning a health
+percentage. Equal-budget comparators correctly show0% less light versus fixed.
+Build, seven Node tests and targeted Chromium QA pass; screenshots captured at
+desktop/mobile, mobile inspected; no overflow at1440/390/320. No science changed.
+
+## Lower-capture mode — latest checkpoint, 2026-10-25
+
+User authorized showing a favorable measured scenario with fewer images. Default
+**Fewer images** now replays saved32-image adaptive versus40-image fixed runs.
+Featured precursor seed304:4/4 divisions versus1/4,20% fewer exposures. It was
+selected after evaluation for demonstration; seed selector/cohort disclosure say
+so. All six seeds301–306 and three scenarios remain accessible. Cohort precursor
+23/24 versus11/24; sudden4/24 versus11/24. Fixed32 comparator and original40/40
+**Equal budget** mode remain. No algorithm/scenario/results were changed.
+Cell health is unmeasured;20% less imaging light assumes equal dose per capture.
+
+`scripts/export_controlled_budget_demo.py --cuda` verifies the portable probe and
+exports committed `apps/web/public/demo/controlled/budget32/` assets.72 rows checked,
+36 actual GPU batches/sample CPU parity passed (max1.19e-7),26.7s internally.
+Production build, seven Node tests,14 focused Python tests and Chromium QA pass.
+Browser QA checks all18 metric combinations, modes/comparators/resets/evidence
+gating/causal displays/model view/reduced motion/five widths. Default playback22.069s;
+desktop/mobile screenshots inspected. Phase5 frozen registration still passes.
+Full evidence and reproduction: [LOWER_CAPTURE_DEMO.md](LOWER_CAPTURE_DEMO.md).
+No new long benchmark launched; existing preview on127.0.0.1:5174 may be reused.
+Phase6 human comprehension, real archive refresh and Phase7 readiness remain open.
+
+## Latest simplification — 2026-10-25
+
+User approved the capture animation and requested removing recent-capture strips.
+Strips and their styles are removed. Constant-speed shared-clock playback is now
+default; optional capture pauses are explicitly a viewing aid. Introductory
+comparison copy says both methods share240 frames and40 images while differing
+in acquisition timing. Both still use the original saved schedules/metrics.
+Build, seven Node tests and targeted Chromium checks pass (full playback21.091s,
+shared clocks, capture animation, evidence gating, resets, adverse/quiet scenarios,
+reduced motion, five widths320–1440). Desktop/mobile screenshots inspected.
+Local checker: `.tools/glimpse-clock-check.cjs`; screenshots `glimpse-clock-*.png`.
+This supersedes the recent-capture/guided-default descriptions below.
+
+## Capture-clarity update — 2026-10-25
+
+User requested clearer/smoother captures and asked about fewer images and estimated
+health. Approved styling is preserved; capture sweeps, guided dwell, capture numbers,
+explicit no-exposure states, four inspectable acquired-image thumbnails, timeline
+marker, Quick playback and end-result exposure bars are implemented. Original
+40-image experiment/metrics unchanged. Guided completion28.919s. Production build,
+seven Node tests, six focused Python tests and the complete Chromium interaction
+loop pass; five widths320–1440, reduced motion and unfavorable conditions checked.
+Screenshots inspected. See [DEMO_CAPTURE_CLARITY.md](DEMO_CAPTURE_CLARITY.md).
+Preview server started at `http://127.0.0.1:5174/`; reuse if still listening.
+
+A predeclared separate probe used32 adaptive images versus fixed32/fixed40,
+unchanged algorithm, new seeds301–306 and all three conditions. Precursor23/24
+versus8/24 and11/24; abrupt4/24 versus8/24 and11/24.72 comparisons completed16.3s;
+all rows/source/metrics independently checked12.8s; compact source/results preserved.
+See [CONTROLLED_BUDGET_RESULTS.md](CONTROLLED_BUDGET_RESULTS.md). No lower-budget
+mode has been substituted into the demo. No published cell-health coefficients
+transfer to these data; UI states equal-light-per-capture dose assumption and leaves
+health unmeasured. Frozen Phase5 registration still passes. Phase6 human comprehension,
+research archive refresh and Phase7 readiness remain outstanding.
+
+## Reviewed continuation checkpoint — 2026-10-25
+
+**Phase 5 is complete and verified.** The user-run wrapper finished all five
+stages at 00:47:23 EDT. Full source recomputation is exact across six conditions /
+36 runs, all 36 generated report cards match the benchmark, and a fresh
+`scripts/run_phase5.py verify` passed during continuation. The comparison chart
+and representative win/loss panels were inspected. No benchmark was restarted.
+See [PHASE5_RESULTS.md](PHASE5_RESULTS.md) for results, evidence and limitations.
+
+Fixed covers more real annotated divisions in all six conditions. PHOTON's
+raw-hold MSE is lower on pairwise-common withheld targets in five of six conditions,
+but fixed wins on each schedule's own withheld targets in all six. Gaussian
+forecast MSE loses to raw hold in all 36 runs. This is the older frozen controller;
+the newer controlled-demo controller has not been validated on these held-out embryos.
+
+The approved primary synthetic demo and sculptural hero remain unchanged.
+The optional real-data archive still uses a partial export; do not claim it now
+displays the complete benchmark. Next useful implementation: update/test the
+checkpoint-bound exporter to consume verified completed results, then refresh
+research evidence without repeating full-volume scoring. Phase 6's human
+comprehension gate remains open; Phase 7 submission/reproducibility work remains.
+No model escalation is needed for documentation or routine export integration.
+
+This checkpoint supersedes historical live/paused/incomplete Phase 5 status below.
+
 ## Account switch checkpoint — start here
 
 The user approved the current appearance and flow and requested committing/pushing

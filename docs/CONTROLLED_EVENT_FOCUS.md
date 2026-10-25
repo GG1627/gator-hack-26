@@ -1,5 +1,12 @@
 # Event-focused controlled demonstration
 
+**Latest UI — 2026-10-25:** the default demonstration now features the separate
+measured32-image adaptive versus40-image fixed comparison. Seed304 was selected
+after evaluation as a successful precursor example; all six prospective seeds,
+unfavorable scenarios and a fixed32 comparator remain available. The original
+40/40 experiment documented below remains under **Equal budget**. See
+[LOWER_CAPTURE_DEMO.md](LOWER_CAPTURE_DEMO.md) for selection, results, export and QA.
+
 This is an explicitly synthetic observability experiment, authorized by the user
 after the real-data ablations showed weak scheduling gains. It supplements the
 real microscopy evaluation; it does not replace it or establish biological efficacy.
