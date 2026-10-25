@@ -1,5 +1,5 @@
 /** @type {Record<string, string>} */
-export const names = { fixed: 'Fixed timing', photon: 'Glimpse adaptive', image_change: 'Image change', random_7: 'Random · seed 7', random_42: 'Random · seed 42', random_2026: 'Random · seed 2026' };
+export const names = { fixed: 'Fixed timing', photon: 'Peekaboo adaptive', image_change: 'Image change', random_7: 'Random · seed 7', random_42: 'Random · seed 42', random_2026: 'Random · seed 2026' };
 
 // The replay is a viewer of a closed experiment. No policy runs in this process.
 // Even though the whole schedule is available, image selection uses only <= t.

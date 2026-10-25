@@ -14,7 +14,7 @@ export function ContactSheet({run,comparator,t,onSeek,events}: {run:Run;comparat
     <div className="sheet-caption"><span>Observation history</span><span>Source frames {start}–{end} · shared {end-start+1}-frame window</span></div>
     {[comparator,'photon'].map(method=>{
       const counts=run.methods[method].config.acquired_indices.filter(i=>i<=t).length;
-      return <div className="contact-row" key={method}><div className="policy-label"><strong>{method==='photon'?'Glimpse':method==='fixed'?'Fixed timing':names[method]}</strong><span>{counts} / {run.budget} acquired</span></div><div className="contact-track">
+      return <div className="contact-row" key={method}><div className="policy-label"><strong>{method==='photon'?'Peekaboo':method==='fixed'?'Fixed timing':names[method]}</strong><span>{counts} / {run.budget} acquired</span></div><div className="contact-track">
         <div className="contact-slots" style={{gridTemplateColumns:`repeat(${count},minmax(0,1fr))`}}>{contactSlots(run,method,t,count).map(slot=><button key={slot.start} className={`contact-slot ${slot.kind}`} onClick={()=>onSeek(slot.imageIndex??slot.start)} aria-label={slot.imageIndex==null?`${method}: ${slot.kind} at frames ${slot.start} to ${slot.end}`:`${method}: inspect acquired frame ${slot.imageIndex}`} title={slot.imageIndex==null?`${slot.start}–${slot.end}: ${slot.kind}`:`Acquired ${slot.indices.join(', ')}; showing ${slot.imageIndex}`}>
           {slot.imageIndex!=null?<><img src={`/demo/images/${run.sequence_id}/${slot.imageIndex}.png`} alt={`Measured at ${slot.imageIndex}`} loading="eager"/><span>{slot.imageIndex}{slot.indices.length>1?` +${slot.indices.length-1}`:''}</span></>:<span className="slot-dash">—</span>}
         </button>)}</div>

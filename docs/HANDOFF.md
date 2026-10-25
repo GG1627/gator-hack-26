@@ -1,4 +1,55 @@
-# PHOTON / Glimpse session handoff
+# PHOTON / Peekaboo session handoff
+
+**Full-viewport opening light - 2026-10-25:** moved SideRays into a body portal
+with a fixed, full-viewport layer at (0,0). It no longer inherits the presentation
+max-width, gutters, slide transform, clipping or masks. Opening content stays in
+front of it; the transparent mascot is unchanged. Research archive trigger is
+removed on the opening only and remains available on later slides. Production
+build passed. Browser checks covered viewport bounds/overflow from 320px through
+1920px, opening-only archive visibility, later archive access and effect lifecycle.
+
+**Opening light refinement - 2026-10-25:** user clarified the desired composition:
+transparent capybara plus the actual animated React Bits SideRays. PNG alpha was
+confirmed (0-255; all four corners fully transparent). Existing live component
+was too faint and confined behind the mascot. Moved it to a separate slide layer,
+restored the supplied 2.5 speed / 2 intensity / 1 glow / full opacity and mouse
+tracking, and softened its boundaries. Build and focused Chromium checks passed:
+live WebGL draw loop, pause, dynamic reduced motion, responsive overflow and no
+page errors. Mascot and light remain independent assets/components.
+
+**After Hours implemented - current checkpoint, 2026-10-25:** the selected M
+identity is implemented across opening, four story slides, dedicated comparison,
+results and research archive chrome. Solid charcoal, butter yellow, blue Fixed
+and amber Peekaboo; local Manrope, capybara scientist, custom controls and opening
+SideRays. Design: [AFTER_HOURS_DESIGN.md](AFTER_HOURS_DESIGN.md). Completed plan and
+verification: [PEEKABOO_IMPLEMENTATION_PLAN.md](PEEKABOO_IMPLEMENTATION_PLAN.md).
+
+All 7 existing Node tests and TypeScript/Vite production build passed. Playwright
+Chromium checked six slides/results at 1440x900, 1366x768, 390x844 and 320x740;
+no horizontal overflow, desktop default screens fit, no app console errors or
+framework overlay. Full replay to frame 239 produced 40/32 captures and no future
+source frames; explicit results, seek/replay, hash/back/focus, archive pause,
+return and Escape verified. All 36 displayed run results matched saved ledgers;
+fixed32, both fixed offsets, quiet/adverse outcomes and equal-budget light checked.
+Evidence remains gated behind explicit reveal. Ambient pause/live reduced motion,
+context recovery, no-WebGL fallback, inactive/tab-hide suspension, true capture
+animation (no false resume pulse) and manifest error/retry passed. Final archive
+readability was also adjusted. Existing lazy 3D chunk size warning remains.
+
+No scientific algorithm, protocol, benchmark or evidence changes. Current UI and
+all earlier design work remain uncommitted; no push or deployment. Real archive
+is still the older partial export, with completed Phase 5 limitation visible.
+Phase 6 human comprehension and Phase 7 fresh install/backup recording/submission
+remain open. Sol Medium is sufficient for small copy/layout refinements; no
+additional architecture model is needed. Preview: http://127.0.0.1:5174/ . Temporary
+screenshots/scripts are outside the repo in the local temp peekaboo-after-hours
+folder. Earlier rose-gold checkpoints are superseded by this implementation.
+
+**Demo preparation guide:** [DEMO_PREP.md](DEMO_PREP.md) collects the problem,
+challenge fit and dated upstream sources, technology roles, measured results,
+light-dose wording, live walkthrough, pitch outline, judge Q&A, limitations,
+evidence links and final rehearsal checklist. Documentation only; no new phase
+gate or test completion is implied.
 
 **Latest UI statistic:** the final-specimen/cell-health card is now **Less imaging
 light:20% versus fixed**, derived from32/40 captures with equal illumination per

@@ -1,88 +1,84 @@
-﻿import { useEffect, useRef, useState } from 'react';
-import { names, evaluationUrl, reasonText } from './replay.mjs';
-import { SpecimenStage } from './SpecimenStage';
-import { ContactSheet } from './ContactSheet';
-import { ResearchPanel } from './ResearchPanel';
-import { Evaluation } from './Evaluation';
-import { Icon } from './Icon';
-import { Introduction } from './Introduction';
+import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import { ControlledLab } from './ControlledLab';
-import type { Manifest, Run, ViewMode, Evaluation as EvaluationData } from './types';
+import { StorySlide } from './StorySlides';
+import { Arrow, Button } from './PeekabooUI';
+import { slideIds, slideIndex } from './presentation.mjs';
 
-async function fetchJSON<T>(url:string,signal?:AbortSignal):Promise<T>{
-  const response=await fetch(url,{signal});
-  if(!response.ok)throw new Error(`Could not load ${url} (${response.status})`);
-  let value:T;
-  try{value=await response.json();}catch{throw new Error(`Missing or invalid demo JSON: ${url}`);}
-  if(signal?.aborted)throw new DOMException('Request cancelled','AbortError');
-  return value;
-}
+const ResearchArchive = lazy(() => import('./ResearchArchive'));
 
-function Brand(){return <header className="site-header"><a className="brand" href="/" aria-label="Glimpse home">glimpse</a><span className="tagline">Know when to look.</span><nav aria-label="Main"><a href="#controlled-lab" className="active">Demo</a><a href="#research" onClick={()=>{for(const id of ['real-study','research']){const section=document.getElementById(id);if(section instanceof HTMLDetailsElement)section.open=true;}}}>Research</a></nav></header>;}
+export default function App() {
+  const [slide, setSlide] = useState(() => slideIndex(window.location.hash));
+  const [archiveOpen, setArchiveOpen] = useState(false);
+  const [demoVisited, setDemoVisited] = useState(() => slide === 5);
+  const dialog = useRef<HTMLDialogElement>(null);
+  const focusPending = useRef(false);
+  const researchButton = useRef<HTMLButtonElement>(null);
+  const navigate = (index: number) => {
+    const next = Math.max(0, Math.min(slideIds.length - 1, index));
+    if (next === slide) return;
+    focusPending.current = true;
+    window.location.hash = slideIds[next];
+  };
+  useEffect(() => {
+    const changed = () => {
+      focusPending.current = true;
+      const next = slideIndex(window.location.hash);
+      setSlide(next);
+      if (next === 5) setDemoVisited(true);
+    };
+    window.addEventListener('hashchange', changed);
+    return () => window.removeEventListener('hashchange', changed);
+  }, []);
+  useEffect(() => {
+    if (focusPending.current) {
+      document.querySelector<HTMLElement>('[data-active-slide] h1')?.focus({ preventScroll: true });
+      window.scrollTo({ top: 0, behavior: 'instant' });
+      focusPending.current = false;
+    }
+    document.title = `Peekaboo — ${['See more. Illuminate less.', 'The cost of looking', 'Choose when to look', 'Gaussian cell models', 'Native CUDA Rust', 'The comparison'][slide]}`;
+  }, [slide]);
+  useEffect(() => {
+    const keyboard = (event: KeyboardEvent) => {
+      const target = event.target as HTMLElement;
+      if (archiveOpen || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey || target.closest('input, select, textarea, button, a, summary, [contenteditable="true"], [role="slider"]')) return;
+      if (event.key === 'ArrowRight') { event.preventDefault(); navigate(slide + 1); }
+      if (event.key === 'ArrowLeft') { event.preventDefault(); navigate(slide - 1); }
+    };
+    window.addEventListener('keydown', keyboard);
+    return () => window.removeEventListener('keydown', keyboard);
+  });
+  useEffect(() => {
+    if (archiveOpen) dialog.current?.showModal();
+    else if (dialog.current?.open) dialog.current.close();
+  }, [archiveOpen]);
+  const closeArchive = () => { setArchiveOpen(false); researchButton.current?.focus(); };
 
-function Replay({manifest}:{manifest:Manifest}){
-  const [sequence,setSequence]=useState('mskcc_confocal_s2');
-  const [budget,setBudget]=useState(54);
-  const [comparator,setComparator]=useState('fixed');
-  const [mode,setMode]=useState<ViewMode>('gaussians');
-  const [run,setRun]=useState<Run|null>(null);
-  const [error,setError]=useState('');
-  const [t,setT]=useState(0);
-  const [playing,setPlaying]=useState(false);
-  const [speed,setSpeed]=useState(12);
-  const [revealed,setRevealed]=useState(false);
-  const [evaluation,setEvaluation]=useState<EvaluationData|null>(null);
-  const [evalError,setEvalError]=useState('');
-  const [preview,setPreview]=useState(false);
-  const firstLoad=useRef(true);
-  const condition=manifest.conditions.find(c=>c.sequence_id===sequence&&c.budget===budget);
-  useEffect(()=>{
-    const controller=new AbortController();
-    setRun(null);setError('');setPlaying(false);setT(0);setRevealed(false);setEvaluation(null);setEvalError('');setPreview(false);
-    if(!condition){setError('This experiment was not exported.');return;}
-    fetchJSON<Run>(`/demo/${condition.replay}`,controller.signal).then(value=>{
-      if(value.key!==condition.key||value.frame_count<1)throw new Error('Experiment metadata mismatch');
-      setRun(value);
-      // Explicit midpoint preview of a closed run. First Play starts at frame 0.
-      if(firstLoad.current){firstLoad.current=false;setT(Math.floor((value.frame_count-1)/2));setPreview(true);}
-    }).catch(e=>{if(e.name!=='AbortError')setError(e.message);});
-    return()=>controller.abort();
-  },[condition]);
-  useEffect(()=>{
-    if(!playing||!run)return;
-    const timer=window.setInterval(()=>setT(value=>Math.min(value+1,run.frame_count-1)),1000/speed);
-    return()=>window.clearInterval(timer);
-  },[playing,run,speed]);
-  useEffect(()=>{if(run&&t===run.frame_count-1)setPlaying(false);},[t,run]);
-  useEffect(()=>{
-    const controller=new AbortController();const url=condition&&evaluationUrl(condition,revealed);
-    if(!url)return;setEvalError('');
-    fetchJSON<EvaluationData>(url,controller.signal).then(setEvaluation).catch(e=>{if(e.name!=='AbortError')setEvalError(e.message);});
-    return()=>controller.abort();
-  },[condition,revealed]);
-  useEffect(()=>{
-    if(revealed&&evaluation)document.querySelector('.evaluation')?.scrollIntoView({block:'start',behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
-  },[revealed,evaluation]);
-  const seek=(value:number)=>{setPlaying(false);setPreview(false);setT(value);};
-  const play=()=>{if(!run)return;if(preview||t===run.frame_count-1)setT(0);setPreview(false);setPlaying(value=>!value);};
-  const activeRun=run?.key===condition?.key?run:null;
-  const current=activeRun?.methods.photon.decisions[t];
   return <>
-    <section className="experiment-heading" id="experiment" aria-labelledby="experiment-title"><div><p className="eyebrow">The recorded experiment</p><h2>Same budget. Different moments.</h2></div><p>Compare fixed-interval imaging with Glimpse’s adaptive choices. Reveal the held-out evidence to see what each schedule preserved.</p></section>
-    {error?<div className="error" role="alert">{error}<p>Rebuild the local demo assets, then reload this page.</p></div>:!activeRun?<div className="loading" role="status">Loading the recorded experiment…</div>:<>
-      <SpecimenStage run={activeRun} t={t} mode={mode} setMode={setMode}/>
-      <div className="transport"><button className="play-button" onClick={play} aria-label={playing?'Pause replay':'Play replay'} title={preview?'Play the complete experiment from frame 0':playing?'Pause replay':'Play replay'}><Icon name={playing?'pause':'play'} size={23}/></button><label className="scrubber"><span className="sr-only">Source frame</span><input type="range" min="0" max={activeRun.frame_count-1} value={t} onChange={e=>seek(Number(e.target.value))}/></label><output className="timecode"><span>{String(t).padStart(3,'0')} / {activeRun.frame_count-1}</span><small>{preview?'Recorded preview · play starts at 0':`${(t*activeRun.frame_interval_minutes).toFixed(2)} source min`}</small></output><label className="speed"><span className="sr-only">Playback speed</span><select value={speed} onChange={e=>setSpeed(Number(e.target.value))}><option value="6">6 frames/s</option><option value="12">12 frames/s</option><option value="24">24 frames/s</option></select></label></div>
-      <ContactSheet run={activeRun} comparator={comparator} t={t} onSeek={seek} events={revealed?evaluation?.division_times:undefined}/>
-      <div className="decision-rail" aria-label="Current acquisition decision"><span className="rail-label">Current decision</span><p><span className={`decision-marker ${current?.decision==='ACQUIRE'?'capture':''}`}/>{current?reasonText[current.reason]||current.reason.replaceAll('_',' '):'—'}</p><button className={revealed?'evidence-button selected':'evidence-button'} aria-pressed={revealed} onClick={()=>{setPlaying(false);setRevealed(value=>!value);}}><Icon name="eye" size={19}/>{revealed?'Hide evidence':'Reveal evidence'}</button></div>
-      <div className="experiment-meta"><span>C. elegans · embryo {sequence.endsWith('2')?'02':'03'}<span className="meta-divider">/</span>{budget} of {activeRun.frame_count} volumes per schedule</span><span>Exposure proxy {(budget/activeRun.frame_count).toFixed(3)} · {((1-budget/activeRun.frame_count)*100).toFixed(1)}% fewer captures than all-frame imaging, for both schedules.</span></div>
-      {revealed?(evalError?<p className="error" role="alert">{evalError}</p>:evaluation?<Evaluation run={activeRun} data={evaluation} comparator={comparator} t={t} gaussian={true} onClose={()=>{setRevealed(false);document.getElementById('experiment')?.scrollIntoView({block:'start'});}}/>:<p className="loading-inline" role="status">Opening evaluation-only images and results…</p>):null}
-    </>}
-    <div className="disclosures"><details id="settings"><summary>Experiment settings <span>Embryo, budget & comparison</span></summary><div className="detail-body experiment-controls"><label htmlFor="sequence">Sequence<select id="sequence" value={sequence} onChange={e=>setSequence(e.target.value)}>{[...new Set(manifest.conditions.map(c=>c.sequence_id))].map(s=><option key={s} value={s}>C. elegans · embryo {s.endsWith('2')?'02':'03'}</option>)}</select></label><label htmlFor="budget">Image budget<select id="budget" value={budget} onChange={e=>setBudget(Number(e.target.value))}>{[...new Set(manifest.conditions.map(c=>c.budget))].map(b=><option key={b} value={b}>{b} / 270 volumes</option>)}</select></label><label htmlFor="comparison">Compare with Glimpse<select id="comparison" value={comparator} onChange={e=>setComparator(e.target.value)}>{Object.entries(names).filter(([key])=>key!=='photon').map(([key,name])=><option key={key} value={key}>{name}</option>)}</select></label><p>All views replay authentic closed runs. Settings change which saved experiment you inspect; they do not execute or tune a controller.</p></div></details>{activeRun?<ResearchPanel manifest={manifest} run={activeRun} t={t} comparator={comparator}/>:null}</div>
+    <a className="skip-link" href="#presentation-content" onClick={event => { event.preventDefault(); document.getElementById('presentation-content')?.focus(); }}>Skip to presentation</a>
+    <main className={`peekaboo ${slide === 0 ? 'opening' : ''}`}>
+      <header className="peek-header">
+        <a className="peek-brand" href="#opening" aria-label="Peekaboo home">Peekaboo<span className="brand-dot" aria-hidden="true"/></a>
+        <nav aria-label="Main navigation"><button onClick={() => navigate(0)} aria-current={slide < 5 ? 'page' : undefined}>Story</button><button onClick={() => navigate(5)} aria-current={slide === 5 ? 'page' : undefined}>Demo</button></nav>
+        {slide !== 0 ? <button ref={researchButton} className="research-trigger" onClick={() => setArchiveOpen(true)}>Research archive<Arrow/></button> : null}
+      </header>
+      <div id="presentation-content" tabIndex={-1}>
+        {slide < 5 ? <section key={slide} className={`story-slide story-${slide}`} data-active-slide="true" aria-label={`Slide ${slide + 1} of 6`}><StorySlide active={!archiveOpen} index={slide} onStart={() => navigate(1)}/></section> : null}
+        {demoVisited ? <div hidden={slide !== 5} data-active-slide={slide === 5 ? 'true' : undefined}><ControlledLab active={slide === 5 && !archiveOpen}/></div> : null}
+      </div>
+      <footer className="presentation-footer">
+        <span className="footer-note">{slide === 0 ? 'See more. Illuminate less.' : ['','The cost of looking','Adaptive acquisition','A compact representation','Fresh off the frontier','The comparison'][slide]}</span>
+        <nav className="slide-nav" aria-label="Slide navigation">
+          <button aria-label="Previous slide" disabled={slide === 0} onClick={() => navigate(slide - 1)}><Arrow back/></button>
+          <div className="slide-dots">{slideIds.map((id: string, index: number) => <button key={id} aria-label={`Go to slide ${index + 1}`} aria-current={index === slide ? 'step' : undefined} onClick={() => navigate(index)}><i/></button>)}</div>
+          <span className="slide-count">{String(slide + 1).padStart(2, '0')} <span>/ 06</span></span>
+          <button aria-label="Next slide" disabled={slide === 5} onClick={() => navigate(slide + 1)}><Arrow/></button>
+        </nav>
+        <span className="footer-event">GatorHack V · 2026</span>
+      </footer>
+    </main>
+    <dialog ref={dialog} className="research-dialog" onCancel={closeArchive} onClose={() => { if (archiveOpen) closeArchive(); }} aria-labelledby="archive-title">
+      <div className="dialog-bar"><span id="archive-title">Peekaboo / Research archive</span><Button variant="quiet" onClick={closeArchive}>Close archive <span aria-hidden="true">×</span></Button></div>
+      {archiveOpen ? <Suspense fallback={<p role="status">Opening the research archive…</p>}><ResearchArchive/></Suspense> : null}
+    </dialog>
   </>;
-}
-
-export default function App(){
-  const [manifest,setManifest]=useState<Manifest|null>(null);const [error,setError]=useState('');
-  useEffect(()=>{const controller=new AbortController();fetchJSON<Manifest>('/demo/manifest.json',controller.signal).then(value=>{if(value.version!==1||!value.conditions?.length)throw new Error('Unsupported or incomplete demo export');setManifest(value);}).catch(e=>{if(e.name!=='AbortError')setError(e.message);});return()=>controller.abort();},[]);
-  return <main><Brand/><Introduction/><ControlledLab/><details className="real-study" id="real-study"><summary><span><small>THE RESEARCH ARCHIVE</small>Explore real microscopy</span><span>Recorded C. elegans study <i aria-hidden="true">↗</i></span></summary>{manifest?<Replay manifest={manifest}/>:error?<section className="setup error" role="alert"><h2>Prepare the real experiment.</h2><p>{error}</p><p>Generate the local display assets:</p><code>.venv/Scripts/python.exe scripts/build_phase6_assets.py</code><p>Then export the 3D views with scripts/build_glimpse_spatial.py.</p><button onClick={()=>window.location.reload()}>Retry loading</button></section>:<p className="loading" role="status">Opening the research archive…</p>}</details><footer><span>GLIMPSE <span className="footer-divider">/</span> GatorHack V 2026</span><span className="partial-status">Controlled demo · real microscopy evaluated separately.</span></footer></main>;
 }

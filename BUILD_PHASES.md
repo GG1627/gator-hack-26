@@ -1,5 +1,11 @@
 # PHOTON — Living Build Plan and Test Gates
 
+> **Full-viewport opening light - 2026-10-25:** SideRays now renders in a fixed body portal from the viewport top-right, outside all content width/padding/clipping/masks. Opening-only Research archive trigger removed; later access retained. Production build and focused responsive/navigation checks completed. No scientific or phase-gate changes.
+
+> **Opening light refinement - 2026-10-25:** confirmed transparent mascot PNG and retained actual React Bits WebGL SideRays; expanded the effect to a separate opening-slide layer, restored stronger supplied settings and mouse tracking, softened bounds. Focused browser checks passed for animation/pause/live reduced motion/responsive overflow; web build passed. No science or phase-gate changes.
+
+> **After Hours implementation verified - 2026-10-25:** selected M identity implemented across story/demo/results and archive chrome, with capybara scientist, local Manrope, semantic blue/amber controls and adapted SideRays. All 7 web tests and TypeScript/Vite build passed. Playwright Chromium verified 1440x900, 1366x768, 390x844 and 320x740, full 239-step replay and causal held sources, state/focus/navigation, all 36 saved result displays against ledgers, alternate fixed budgets/offsets, evidence gates, reduced motion, WebGL context recovery/fallback, capture feedback and manifest retry. No app console errors or horizontal overflow. Existing lazy 3D bundle warning remains. Details: [completed plan](docs/PEEKABOO_IMPLEMENTATION_PLAN.md). No science/evidence changes, no commit/push/deploy. Human comprehension and final fresh-install/recording/submission gates remain open; no phase marked complete from UI QA.
+
 > **Active checkpoint — 2026-10-25:** **Phase 5 complete and verified.** All five runner stages finished; full source recomputation matches exactly across six conditions / 36 runs. Fresh ledger verification passed; chart and representative failure panels reviewed. Results and limitations: [`docs/PHASE5_RESULTS.md`](docs/PHASE5_RESULTS.md). Approved controlled synthetic demo remains primary. The real-data browser archive is still an older partial snapshot pending exporter integration. Phase 6 human comprehension and Phase 7 final submission/reproducibility work remain open. Historical paused/running/incomplete Phase 5 notes below are superseded.
 
 > GatorHack V · 48-hour build · Started: 2026-10-23  
@@ -13,6 +19,13 @@
 > **Account-switch handoff:** `docs/HANDOFF.md` records the continuation prompt, frozen science, local artifacts and Phase5 gates. Source/tests/lockfiles/docs are checkpointed on `main` at `GG1627/gator-hack-26`; historical "untracked/no HEAD" notes describe the earlier verification sessions. Raw datasets, environments, binaries and generated runs remain ignored and available in this existing workspace. Phase5 is paused/incomplete; Phase6 early start is explicitly authorized; see the checkpoint below.
 
 ## Current authorized branch — bounded controlled event focus
+
+**Demo-preparation documentation — 2026-10-25:** added
+[docs/DEMO_PREP.md](docs/DEMO_PREP.md), consolidating challenge eligibility sources,
+implemented technology roles, selected/cohort and real-data results, pitch and
+walkthrough, judge Q&A, scientific limitations, evidence map and final readiness
+checklist. Documentation only; outstanding human comprehension/fresh-install/
+submission gates remain open. No new scientific computation or UI change.
 
 **Latest statistic copy — 2026-10-25:** replaced the final-specimen/cell-health
 card with **Less imaging light:20% versus fixed**, calculated from32/40 captures
