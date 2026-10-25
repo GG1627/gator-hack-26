@@ -1,19 +1,198 @@
 # PHOTON / Glimpse session handoff
 
+## Account switch checkpoint — start here
+
+The user approved the current appearance and flow and requested committing/pushing
+all work before switching accounts. Continue in the same workspace if possible:
+`C:\Users\gael8\Coding\gator-hack-26`, branch `main`, remote
+`https://github.com/GG1627/gator-hack-26.git`.
+
+- **Approved product:** sculptural 3D hero; controlled synthetic replay is the main
+  demo. At frame 239 a large results panel opens automatically. Default seed 2026
+  captures 4/4 divisions vs fixed 3/4, with 40 images each, 83.3% fewer captures
+  than all-frame imaging for both, and eight final simulated nuclei. Health is
+  unmeasured. All six seeds, phase controls and unfavorable scenarios remain available.
+- **Measured cohort:** cued events new 24/24 vs fixed 12/24 (shifted 13/24,12/24)
+  and old controller 12/24. Abrupt events new 6/24 vs fixed 12/24. These are
+  controlled observations, not biological/real-microscopy claims.
+- **User constraint:** do not start hour-long tests. New benchmark batches are
+  bounded to 120 seconds. The user has not requested stopping the existing Phase 5
+  process; do not duplicate/restart/interrupt it.
+- **Live Phase 5:** wrapper PID55068 was confirmed alive at this checkpoint,
+  step 3/5 independent score recomputation. The log records s3/B27 complete,
+  followed by another scoring group at t125/269. Check current status/log rather
+  than trusting these historical indices: `runs/phase5-runner/status.json` and
+  `latest.log`. Frozen source registration last passed. Do not modify/add files in
+  `services/science/photon` or `services/science/tests` while it remains registered.
+- **Completed experiments:** watershed and appearance probes are complete; do not
+  restart them. Sources/results/limitations are in the linked research documents.
+- **Verified frontend:** production build, seven Node tests, full-playback automatic
+  completion, replay/reset, accurate adverse/quiet results, gated evidence,
+  real archive navigation and mobile widths down to 320 passed. Screenshots inspected.
+  Local browser scripts/screenshots live in ignored `.tools/`.
+- **Portable demo:** the 56 files in `apps/web/public/demo/controlled/` are intentionally
+  included in Git (about 10 MB). Only this generated demo directory is unignored.
+  `docs/evidence/controlled-heldout-v1/` preserves compressed measured results,
+  source archive, protocol and export verification. The main demo works independently
+  of the optional real-microscopy manifest.
+- **Local-only state:** `.venv`, `.tools`, `data`, `runs`, `node_modules`, GPU binaries
+  and the large real-microscopy display exports remain ignored. Account switching
+  on this laptop preserves them. A fresh checkout needs dependencies and real-data
+  assets rebuilt only to use the optional research archive or rerun experiments.
+
+Run the portable frontend with `npm.cmd ci` followed by `npm.cmd run dev -- --port 5174`
+from `apps/web` (reuse the existing server if already listening). Existing local URL:
+`http://127.0.0.1:5174/`. See README for Python/data setup. For the small scientific
+check use `.venv/Scripts/python.exe -m pytest tests/test_controlled_event_focus.py -q`;
+do not launch the full registered runner again. Next work should follow the user's
+next request; the approved demo needs no further redesign or speculative features.
+
+Sections below retain historical checkpoints; this account-switch checkpoint
+supersedes conflicting statements about paused/running/completed jobs or next steps.
+
 ## Current instruction and phase status
 
-**Latest account-switch instruction:** research/discussion only, no code changes.
-Read [GLIMPSE_ELEVATION_RESEARCH.md](GLIMPSE_ELEVATION_RESEARCH.md) for the agreed
-research priorities, paper links, causal constraints, experiment boundaries and
-a ready-to-paste continuation prompt. No proposed research improvement is implemented.
-The research notes also record the proposed head-to-head demo: dense reference vs
-equal-budget fixed/adaptive schedules, prominent real capture counts, event/error
-results and explicit unmeasured cell health. No invented damage/death outcomes or
-claims of novelty for the whole established field; no frontend changes authorized.
+**Latest frontend update:** controlled replay is the main demo. At frame 239 it
+automatically reveals a large run-specific results screen: coverage, image count,
+exposure-count proxy and final synthetic specimen state. Results do not substitute
+six-seed aggregates for the selected run. Replay resets the result panel. Real
+microscopy is preserved in collapsed `#real-study`; Research opens that archive.
+Introduction + demo no longer depend on loading the real-data manifest. Production
+build and actual end-to-end completion/browser checks pass, including adverse and
+quiet scenarios and five widths. Desktop/mobile finish screenshots inspected.
+No new scientific jobs were needed. Cell health is explicitly unmeasured.
+
+**Current priority: bounded event-focused controlled demonstration.** User explicitly
+authorized controller/evaluation redesign and synthetic demonstrations with accurate
+measurements, then required avoiding hour-long tests. New code lives outside frozen
+Phase 5 sources. `experiments/controlled` implements image-derived shape-triggered
+bursts; `scripts/run_controlled_benchmark.py` limits each batch to 120 seconds.
+The completed six-seed run took 19.3 internal seconds: precursor coverage 24/24
+versus 12/24 standard fixed, 13/24 and 12/24 shifted fixed, 12/24 old adaptive.
+Abrupt events expose the limitation: new controller 6/24 versus fixed 12/24.
+See [CONTROLLED_EVENT_FOCUS.md](CONTROLLED_EVENT_FOCUS.md). Six focused tests pass.
+All 90 metric rows/source images/traces were checked by the exporter; 54 actual
+CUDA Rust fit-render batches passed sampled CPU comparisons. Export took 55.6s.
+`ControlledLab.tsx` adds a separate synthetic interactive comparison above real
+microscopy. Production build and seven Node tests pass. Chromium checked the lab's
+full interaction/evidence flow, five responsive widths, and the original real-data
+replay regressions. Desktop/mobile screenshots were inspected. Full Phase 5
+registration still passes. Hero appearance is preserved; its CTA now opens the lab.
+Original Phase 5 wrapper PID55068 remains untouched, last observed in step 3/5.
+Do not restart either completed real-data ablation. Older "next" notes below are historical.
+
+**Latest: the six-target appearance probe has completed.** Source images produced11
+eligible comparisons; watershed acquired261, which was excluded as registered.
+Appearance correction loses to raw hold on MSE and MAE in all11 cases. Sources,
+image hashes, histories and exclusions passed verification;44 baseline scalar checks
+match the earlier full-run ledger. See
+[APPEARANCE_FORECAST_RESULTS.md](APPEARANCE_FORECAST_RESULTS.md) and
+`runs/appearance-forecast-probe/report.md`. Recheck with
+`scripts/verify_appearance_probe.py`; no volume rerender is needed for that checker.
+Do not rerun either completed experiment. Original Phase5 remains active separately.
+The recommendation is a targeted motion/uncertainty/budget review before further
+full experiments. Current-controller capture times stayed50/54 identical after the
+perception improvement. The historical “not yet run” notes below are superseded.
+
+**Latest checkpoint: watershed ablation is complete.** `runs/perception-controller-ablation`
+finished its first pass, and verification.json passes source/ledger/target/event/scalar
+checks (24 sealed files). PID54664 is the completed job; do not restart it. No independent
+full source rerender has been run for this experiment. Events: fixed334, adaptive325,
+watershed326 of568. On212 pairwise-common targets, watershed halves Gaussian forecast
+MSE versus original, but raw hold remains better. Scheduling gain is small: one event,
+about0.42% lower matched raw-hold MSE. The registered development criterion passes
+without establishing broad superiority. Historical live-job checkpoints below are stale.
+
+Next: optionally generate `report_perception_ablation.py`, then run the already
+registered six-target `probe_appearance_forecasts.py` against this verified input.
+That selected probe has not run on microscopy yet. Avoid another full benchmark for
+this next check. Original Phase5 PID55068 remains active independently in step3/5.
+
+**Live scientific work — check before starting anything:** the authorized full detector
+ablation is running at `runs/perception-controller-ablation`, PID54664, tool session87658.
+All three acquisition runs have now closed. It is currently scoring saved runs
+(last observed t25/269); do not duplicate it. A closed-ledger event-only audit reports
+fixed334/568, original adaptive325/568, watershed326/568. Full image outcomes are pending.
+The earlier acquisition-progress checkpoint below is historical.
+Read its status.json/run.log and confirm the live PID. Fixed and original adaptive
+acquisition runs have closed; the original schedule exactly matches the saved deployed
+s1 run. Watershed was11/54 acquisitions through t41 at the last observation. Do not
+start a duplicate or edit its registered sources while running. The plan is
+[PERCEPTION_ABLATION_PLAN.md](PERCEPTION_ABLATION_PLAN.md). The separate Phase5 runner
+PID55068 is still in step3/5, independent source recomputation.
+
+New pipeline tests passed, including randomizing all unacquired pixels without changing
+the candidate's decisions/forecasts. After first-pass completion, run
+`scripts/verify_perception_ablation.py` with isolated optional dependencies on PYTHONPATH;
+`--full-recompute` additionally reloads closed geometry and rerenders source scores.
+Results are pending. An explicit acquisition-stage annotation-hash supplement matches
+the earlier count audit. See BUILD_PHASES.md for scope, provenance and test evidence.
+
+After completion, run the fast verifier, then generate the report with
+`scripts/report_perception_ablation.py`. Independent source rerender is available via
+the verifier's `--full-recompute` flag. A separately registered six-target appearance
+correction probe is implemented and synthetically tested but not run on microscopy:
+[APPEARANCE_FORECAST_PLAN.md](APPEARANCE_FORECAST_PLAN.md). Its CLI requires the completed
+ablation and matching verification.json. It preserves acquired texture and applies
+only the Gaussian-predicted change; no success versus raw hold is established yet.
+
+**Latest instruction supersedes the earlier research-only pause:** the user left
+the laptop and authorized continued research and implementation. Research/design ran
+on Astra Medium; after the limit reset the environment reports GPT-6.1 Sol. The active
+model cannot be switched by the agent.
+Keep scientific integrity and the running Phase5 evaluator intact.
+
+Read [GLIMPSE_DEEP_RESEARCH.md](GLIMPSE_DEEP_RESEARCH.md) for the completed primary-source
+review and latest measured preflight. A new opening page is implemented in the existing
+Glimpse theme: problem, conceptual acquisition diagram, experiment anchor, equal-budget
+heading, and research details explaining CUDA Rust release dates and actual limitations.
+Build, 7 Node tests, and desktop/mobile browser interaction checks passed.
+
+The user's latest frontend request is implemented: a larger “See life. Spend light
+wisely.” hero with explicit problem/approach copy and a custom Three.js illustration
+inspired by React Bits Particles/Light Rays. It includes cursor response, a light
+sweep, selectable stages, pause, reduced motion and static WebGL fallback. Six-width
+browser checks, replay regression checks and production build passed. See the
+[design implementation brief](design/glimpse/implementation.md) for details.
+The initial particle illustration was subsequently rejected as too flat. Its
+replacement uses actual sculpted3D nuclei, a transmissive membrane, studio lighting,
+a moving light sheet and a wire-model transformation. Drag/keyboard rotation and
+the retained motion/fallback behavior pass browser checks; current screenshots are
+listed in the design brief. This remains conceptual artwork rather than run data.
+
+New `scripts/audit_perception_counts.py` reads only saved s1 development metadata and
+XML spot counts. Four tests passed. At frame260, 17 accepted Gaussian components versus
+541 annotated spots, with1954 size rejections, prioritize a detector audit. These are
+not segmentation recall or proof of merged nuclei. Before installing CellposeDINO,
+separate small/large rejections and inspect intensity/background drift on acquired s1
+volumes. No frozen scientific algorithm, pretrained model, or frozen run was modified.
+
+**Subsequent authorized implementation:** the region audit confirmed an oversized
+merged region at t260 contains99.4784% of thresholded foreground and gets discarded.
+Added an isolated classical watershed candidate in `experiments/perception/watershed.py`;
+the main policy does not import it. Five-frame acquired-s1 fitting comparison improved
+MSE on four frames and matched t0; t2600.02935190→0.00867538. This is in-sample fitting,
+not forecast or scheduling improvement. Initial10 targeted tests passed. See
+[PERCEPTION_EXPERIMENT.md](PERCEPTION_EXPERIMENT.md) for defaults, results, caveats,
+isolated dependencies and reproducible commands. The subsequent six causal sparse-history
+probes improved Gaussian MSE in all six, but raw hold beat both models in all six.
+Candidate MAE improved in three of six. The11 targeted tests now include tracker/input
+isolation. Full policy ablation and spatial/manual validation remain necessary.
+Phase5 has now completed s3/B54 first-pass scoring and
+started s3/B89, still step1/5; recheck live status before any further action.
+
+[GLIMPSE_ELEVATION_RESEARCH.md](GLIMPSE_ELEVATION_RESEARCH.md) retains earlier discussion
+and historical continuation prompts; its research-only restrictions are superseded
+by the latest user authorization. No biological benefit or overall superiority has
+been established. Avoid invented damage/death outcomes.
 
 **Phase 5 has been manually resumed by the user**, using the standalone background
 runner. At this handoff check, Python PID55068 existed, step1/5 was active, and the
-log had reached evaluation t100/269. Recheck `runs/phase5-runner/status.json` and
+log had reached evaluation t125/269 in s3/B89. Full frozen registration passes,
+including complete file inventory and aggregate science hash. An earlier check only
+compared the37 original files and missed the additional experimental module; it was
+moved outside the frozen package before the next runner stage. Original experiment
+source snapshots were preserved with exact recorded hashes. Recheck `runs/phase5-runner/status.json` and
 `latest.log` on arrival; do not duplicate, stop or alter the running evaluation.
 Phase 5 remains **INCOMPLETE / NOT VERIFIED**. The older paused checkpoint and
 historical instructions below describe the earlier state and do not revoke the

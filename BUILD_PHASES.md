@@ -12,6 +12,45 @@
 
 > **Account-switch handoff:** `docs/HANDOFF.md` records the continuation prompt, frozen science, local artifacts and Phase5 gates. Source/tests/lockfiles/docs are checkpointed on `main` at `GG1627/gator-hack-26`; historical "untracked/no HEAD" notes describe the earlier verification sessions. Raw datasets, environments, binaries and generated runs remain ignored and available in this existing workspace. Phase5 is paused/incomplete; Phase6 early start is explicitly authorized; see the checkpoint below.
 
+## Current authorized branch — bounded controlled event focus
+
+Latest frontend direction: the controlled replay is now the primary demo. Reaching
+frame 239 automatically stops playback, opens the saved evidence and scrolls to a
+large results panel. Cards show the selected run's division coverage versus fixed,
+40 images taken, the exposure-count reduction versus all-frame imaging (same for
+both schedules), and final simulated nuclei/divisions. Cell health remains unmeasured.
+Replay clears the results and restarts at zero; unfavorable/quiet cases retain
+accurate values. Real microscopy is preserved in an expandable research archive;
+the main demo can load independently of the real-data manifest.
+Production build and full-playback Chromium completion checks passed, including
+five viewport widths, automatic reveal/scroll, replay/reset, abrupt/quiet results,
+and archive navigation. Desktop/mobile completion screenshots were inspected.
+No new scientific benchmark or full-volume work was run for this frontend change.
+
+User authorized ambitious controller/scenario redesign with accurate measurements
+and clearly labeled synthetic demonstrations, and explicitly requested no hour-long
+new tests. This branch supplements the real-data protocol without changing frozen
+sources or claiming completion of Phase 5 / the Phase 6 comprehension gate.
+
+- Implemented `experiments/controlled/{event_focus,benchmark}.py`: Gaussian
+  morphology from acquired pixels triggers bursts; exact-budget/gap guards retained.
+- `scripts/run_controlled_benchmark.py`: development seeds 7/42, unchanged settings
+  on evaluation seeds 101–105/2026; three fixed phases, old/new adaptive, three
+  conditions, 40/240 captures each. 120-second per-batch deadline.
+- Executed development 30 comparisons in 6.2s; evaluation 90 in 19.3s.
+- Measured precursor coverage new 24/24, fixed 12/24 (shifted 13/24,12/24), old 12/24.
+  Abrupt coverage new 6/24, fixed 12/24. Quiet coverage undefined. Synthetic only.
+- Six focused tests passed in 4.45s. Export checked all metric rows,
+  source image/code hashes and trace consistency; 54 native CUDA Rust Gaussian-fit
+  render batches passed CPU sample comparisons, completing in 55.6s internally.
+- `ControlledLab.tsx` provides clearly separated controlled replay with all seeds,
+  conditions and fixed phases, source-pixel/model views and gated evaluation.
+  Production build and seven Node tests pass. Chromium lab interactions, evidence
+  gating, unfavorable controls and five responsive widths pass; screenshots inspected.
+  Original real-data replay regressions pass. Full Phase 5 registration still passes.
+- Evidence and limits: [docs/CONTROLLED_EVENT_FOCUS.md](docs/CONTROLLED_EVENT_FOCUS.md).
+  Original Phase 5 runner remains untouched in its independent source verification.
+
 ## Operating instructions for Codex (read first)
 
 1. Read `PHOTON_SPEC.md` and this file before modifying code. **Inspect existing files before scaffolding**; do not overwrite prior work.
@@ -493,6 +532,236 @@ The full recomputation intentionally revisits all saved source/scene targets as 
 ---
 
 ## Decision log (update every phase)
+
+### 2026-10-24 — Six-target appearance probe completed: negative accuracy result
+
+User authorized the bounded probe. Executed `scripts/probe_appearance_forecasts.py`
+against verified closed acquisition archives, with one numerical-library thread.
+Six fixed source targets yielded11 eligible comparisons; watershed's target261 was
+excluded because it was acquired. No replacement/tuned targets or mixing weights.
+
+Corrected forecasts lose to raw hold on both MSE and MAE in all11 cases (original0/6,
+watershed0/5 wins). This rejects an accuracy-upgrade claim for this selected panel.
+`scripts/verify_appearance_probe.py` passed sources/archive/image hashes, causal-history
+and exclusion checks; all44 baseline scalar comparisons match the full-run ledger.
+Three earlier controlled tests passed. No second independent corrected-volume rerender.
+Inspected the t196 watershed comparison. Post-registration execution interval was72.5s,
+excluding startup/input checks; not a performance benchmark.
+
+Results: `docs/APPEARANCE_FORECAST_RESULTS.md` and
+`runs/appearance-forecast-probe/report.md`. The first full detector comparison still
+improves Gaussian MSE but changes only4/54 capture times (50 shared). Next priority is
+motion/uncertainty and budget-allocation design, not additional visual complexity.
+Original Phase5 remains running separately; no new full benchmark launched here.
+
+### 2026-10-24 — Watershed ablation first pass complete and ledger-verified
+
+PID54664 completed the registered3-schedule s1/B54 comparison at22:39 -04:00.
+`scripts/verify_perception_ablation.py` passed source/archive/protocol,24 closed-artifact
+hashes, exact budgets/causal ledgers/gaps, target sets, event counts and scalar accounting.
+Independent full source rerender remains unperformed; no second full evaluation launched.
+
+Events: fixed334/568, original adaptive325/568, watershed326/568. On212 pairwise-common
+adaptive/watershed targets, raw-hold MSE0.00217212286→0.00216290770 (~0.42% lower),
+Gaussian-forecast MSE0.00733396278→0.00364671244 (~50.3% lower). Thus the registered
+development criterion technically passes, but scheduling gain is only one event and
+fixed retains better event coverage. Watershed Gaussian prediction still loses to its
+raw hold on the same targets. Own-target raw MSE remains almost unchanged; target-set
+conditioning continues to matter. No broad superiority or biological benefit claimed.
+
+Artifacts: summary.json, verification.json, event-audit.json under
+`runs/perception-controller-ablation`. Do not restart the completed acquisition job.
+Next bounded test is the registered six-target appearance-preserving forecast probe,
+using these sealed archives. It is prepared but not yet run on microscopy data.
+Original Phase5 PID55068 remains active in step3/5, last observed t150 of its current
+group's independent source recomputation. Its frozen implementation remains intact.
+
+### 2026-10-24 — Acquisition ablation closed; image scoring remains active
+
+All three development acquisition runs closed at54 volumes and the original adaptive
+schedule exactly reproduced the prior deployed s1 schedule. PID54664 is still running
+offline image evaluation in `runs/perception-controller-ablation`; latest observed
+progress t25/269. Do not restart or edit its44 registered source files. The independent
+Phase5 runner PID55068 remains active in step3/5; this new experiment is3 schedules
+on one embryo/budget, not another36-run Phase5 matrix. User asked for clarification;
+no request to stop either runner was made.
+
+After closure, an event-only audit of complete traces and the canonical XML graph
+reported fixed334/568, original adaptive325/568, watershed326/568. This is one additional
+event versus original and eight fewer than fixed, not substantial scheduling progress.
+Image-error results and the registered combined criterion remain pending. Event-only
+artifact: `runs/perception-controller-ablation/event-audit.json`.
+
+Prepared a separate, parameter-free appearance-preserving forecast probe: acquired
+image plus predicted Gaussian change. Three controlled tests passed in24.71s for
+zero-change preservation, known model change with static residual texture, clipping,
+immutable output and provenance guards. This is synthetic correctness, not microscopy
+success. Code under `experiments/forecasting/`; plan `docs/APPEARANCE_FORECAST_PLAN.md`.
+`scripts/probe_appearance_forecasts.py` uses only six fixed selected targets and saved
+causal archives after the input ablation completes and passes ledger verification.
+It has not yet executed on source data. Report/verification tools are prepared.
+
+### 2026-10-24 — Registered full causal detector ablation started
+
+User authorized further scientific implementation/testing. Registered
+`docs/PERCEPTION_ABLATION_PLAN.md`: s1 only,270 frames,54 acquisitions,seed42; fixed,
+original paced_robust adaptive, and identical adaptive settings with watershed fitting.
+Added isolated `scripts/run_perception_ablation.py`, source ZIP/hash registration,
+lower Windows process priority, one-thread numerical libraries, and per-frame scoring
+only after all three acquisition runs close. No candidate source inside the frozen
+PHOTON inventory. Pairwise/common/own withheld targets and losses will all be retained.
+
+11 targeted pipeline/detector tests passed in4.15s, including a future-pixel perturbation
+test: randomizing every unacquired image leaves the candidate schedule and forecasts
+unchanged. Original controller globals remain isolated. Added verification tooling and
+four passing archive/protocol tampering and stage-gate tests in2.61s.
+
+Live experiment: `runs/perception-controller-ablation`, PID54664, tool session87658.
+At the latest check, fixed and original adaptive runs were closed, the original adaptive
+schedule exactly reproduced the prior deployed s1 run, and watershed had acquired11/54
+volumes through t41. No image/event outcome for the new controller is available yet.
+Use status.json, run.log and the live PID/session; do not duplicate this experiment.
+
+Supplementary annotation SHA registered while acquisition was active; it matches the
+earlier pre-experiment count audit. This is explicitly separate from the original
+protocol, whose source path was fixed but omitted the XML byte hash. No labels were
+parsed by this supplement or supplied to the controller. Source/ledger/full-rerender
+verification is available in `scripts/verify_perception_ablation.py` after completion.
+
+Phase5 PID55068 remains live in independent recomputation step3/5. Its s2/B27 group
+completed recomputation and the next group started. No phase gate newly marked complete.
+Sol High was recommended for critical pipeline/evaluation review; no switch assumed.
+
+### 2026-10-24 — Final hero choreography after user approval
+
+User approved the sculptural3D scene and authorized remaining hero refinements.
+Tied acquisition illumination to the conceptual cycle: Observe sweeps through the
+specimen, Estimate turns acquisition light off, Decide emits one brief pulse.
+Retained the approved composition, manual controls and reduced-motion behavior.
+Production build passed; browser checks passed for drag/keyboard pixel changes,
+pause/resume, stages, offscreen suspension, reduced motion, six responsive widths
+and context-loss fallback. Inspected the light-off model capture. No scientific
+algorithm or result changed. Further hero expansion is not a current priority.
+
+### 2026-10-24 — Replaced flat hero particles with sculptural 3D
+
+User rejected the first right-side illustration as flat/basic. Rebuilt it with
+deformed3D nuclei, a transmissive outer membrane, studio reflections, directional
+lighting, a moving illuminated slice, restrained bloom and actual drag/keyboard
+rotation. Estimate expands the specimen into a wire model, which then reforms.
+Retained the explicit problem/approach narrative and conceptual-data label.
+
+Inspected desktop/mobile and close-up captures. Corrected washed-out exposure and
+glass depth writing that initially obscured the wire model. Production build and7
+Node tests pass; browser checks additionally prove drag/keyboard rotation changes
+rendered pixels. Pause, reduced motion, offscreen suspension, fallback, six responsive
+widths and replay/evidence regressions pass. No scientific results were changed.
+
+### 2026-10-24 — Explicit hero narrative and interactive WebGL illustration
+
+User requested a more compelling hero with explicit problem/approach and motion
+inspired by React Bits/Awwwards. Replaced the small static diagram with a custom,
+lazy-loaded Three.js specimen illustration, light sweep, cursor response and selectable
+Observe/Estimate/Decide stages. Retained chalk/charcoal/oxide branding. Added explicit
+problem/approach explanations, pause/resume, reduced-motion behavior, offscreen/hidden
+render suspension and static WebGL/context-loss fallback. No fabricated outcomes or
+new animation dependency. Technical/design references are in the implementation brief.
+
+Production build and7 Node tests passed. Browser checks passed for the new motion/
+fallback behavior plus existing replay/evidence/budget controls. Screenshots inspected
+on desktop/mobile; no overflow at six widths from320 to1440px. The existing Three.js
+chunk warning remains. Phase6 human comprehension gate remains open.
+
+Phase5 runner PID55068 remains present, now step3/5: full source-score recomputation.
+No scientific or frozen evaluation files were changed for this frontend task.
+
+### 2026-10-24 — Causal perception probes and full freeze validation
+
+Ran the registered three reset histories [0,127,132], [0,188,193], [0,254,260],
+forecasting at horizons1/3. Candidate Gaussian MSE improves on the original in all6
+probes; raw hold beats both in all6. Candidate MAE improves in3/6. These sparse-history
+development probes do not reproduce full policy states or establish acquisition gains.
+Artifacts and all outcomes are recorded in `docs/PERCEPTION_EXPERIMENT.md`.
+
+Added a private-tracker isolation/input-boundary test;11 targeted tests pass. Discovered
+that adding a module inside the frozen package changes its aggregate/inventory hashes
+even if the37 original files match. Relocated the experiment outside that package to
+`experiments/perception/watershed.py`. Full `check_registration` now passes, including
+aggregate hash and archive. Preserved exact original experiment sources with verified
+hashes under each result directory; summaries unchanged. Runner PID55068 remains live,
+s3/B89 image scoring, most recently t125/269. No benchmark process interrupted.
+
+### 2026-10-24 — Implemented experimental watershed perception
+
+User explicitly authorized implementing useful tools/approaches. Added isolated
+`photon.experimental_perception`: marker-controlled intensity watershed before
+Gaussian fitting. This addresses a measured baseline failure: t260's1,762,951-voxel
+region contains99.4784% of thresholded foreground and is rejected for size.
+`scripts/audit_detection_regions.py` reproduces saved counts on five acquired s1
+frames and distinguishes small/large rejections. No s2/s3 model selection.
+
+Registered panel/defaults in `docs/PERCEPTION_EXPERIMENT.md` before candidate volume
+execution. `scripts/compare_perception_panel.py` saved source-hashed full-volume
+in-sample errors and comparison images. Fitting MSE is equal at t0 and lower on the
+other four frames; t2600.02935190→0.00867538,17→263 components. This is not segmentation
+recall, forecast performance, acquisition benefit or biological benefit. Inspected
+t132/t260 images show remaining merged/broad components.
+
+10 targeted tests passed. scikit-image0.26.0/lazy-loader0.4 installed only under
+`.tools/perception-deps`; frozen environment/dependency declarations unchanged.
+Main policy does not import the candidate. All37 frozen hashes still match.
+PID55068 remains live, step1/5; s3/B54 first pass finished and s3/B89 started.
+Phase5/6 gates remain open. Next: isolated causal forecast probes and spatial/manual
+validation before controller integration.
+
+### 2026-10-24 — Authorized opening-page elevation and perception preflight
+
+User authorized continued implementation while away. Added an editorial introduction
+in the selected chalk/charcoal/oxide theme, an explicitly conceptual acquisition
+diagram, and a direct link into the recorded equal-budget experiment. Research details
+now explain CUDA Rust's dated releases, actual computation, CPU parity, integration
+difficulties, and current limits. No generated specimen images or fabricated metrics.
+
+Production build passed (existing large Three.js chunk warning). All 7 Node tests
+passed. Headless Chromium verified initial midpoint preview, no evaluation JSON fetch
+before reveal, anchor clearance, playback from zero, evidence open/close, research
+navigation, budget selection, and no horizontal overflow at 1440, 1024, 390, 320px.
+Desktop/mobile screenshots inspected. Human comprehension remains untested; Phase 6
+is not newly declared complete.
+
+Added `scripts/audit_perception_counts.py` and four passing targeted tests. The audit
+only reads saved s1 development observations and XML spot counts; no volumes, model
+weights, training, inference, or policy changes. At frame260, 17 fitted components
+versus541 annotated spots and1954 size-rejected regions warrant a perception audit.
+These counts are not segmentation recall and cannot diagnose merging versus small
+fragments. Detailed evidence and revised next experiment are in the research brief.
+
+Phase5 runner PID55068 stayed present, step1/5; latest observed progress t175/269 in
+the current scoring group. All37 frozen implementation hashes matched. No runner
+restart, duplicate evaluation, source regeneration, or heavy experiment was launched.
+
+### 2026-10-24 — Astra frontier research review
+
+Completed a literature/repository and read-only implementation review in
+`docs/GLIMPSE_DEEP_RESEARCH.md`. Strongest new candidate: June2026 CellposeDINO
+for acquired-volume nucleus perception, subject to a bounded development audit
+against current components and a simple watershed baseline. Subsequent proposed
+direction: empirical forecast reliability and compact CUDA Gaussian scoring that
+feeds acquisition decisions. No scientific adoption or implementation is approved
+by this record; all candidate gains, resource requirements and transfer quality
+remain untested. Existing frozen protocol, sources, runner and results are unchanged.
+
+Corrected recency interpretation: cell-fate paper public March2026 before October
+journal publication; hybrid-EDA public April2025; uncertainty rescanning public
+October2023; cuTile Rust has April2026 tagged-release evidence preceding September
+announcement. CELLECT is directly relevant to MSKCC but predates the strict current
+12-month window and introduces checkpoint-training-overlap questions. Full source
+links and limitations are retained in the research brief. User confirmed Astra.
+
+Read-only runner observations: PID55068 present; s2/B89 first-pass scoring finished;
+next group advanced to t75/269, still step1/5. Phase5 is incomplete/not verified.
+No inference, tests, installation or heavy experiment was launched for this research.
+Documentation-only review does not satisfy any new phase acceptance criterion.
 
 ### 2026-10-24 — Head-to-head demonstration clarification
 

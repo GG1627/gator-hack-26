@@ -4,7 +4,8 @@
 
 Research prototype for causal, budget-aware microscopy acquisition. The hypothesis
 is that adaptive sampling can preserve useful observations at equal exposure
-counts. Held-out adaptive performance and biological benefit remain unmeasured.
+counts. The current held-out event audit favors fixed sampling in all six conditions;
+image-score verification is still running. Biological benefit has not been measured.
 Read [PHOTON_SPEC.md](PHOTON_SPEC.md) and [BUILD_PHASES.md](BUILD_PHASES.md) for
 requirements and verified progress.
 
@@ -25,7 +26,18 @@ parity and real-data CPU fallback work. The latency audit adds an optional
 persistent GPU worker and faster packing. Dense small-output batches benefit
 end to end; real-volume predictions remain faster on CPU, which stays default.
 The complete suite passes85 tests. Independent quality/event evaluation is next
-in Phase 5. For continuing in a new session, read [the handoff](docs/HANDOFF.md).
+in Phase 5, whose standalone runner is active. For continuing in a new session, read
+[the handoff](docs/HANDOFF.md). The implemented Glimpse frontend and isolated
+[perception experiments](docs/PERCEPTION_EXPERIMENT.md) have separate verification
+records; experimental improvements are not part of the frozen benchmark.
+
+A separate [controlled event-focus experiment](docs/CONTROLLED_EVENT_FOCUS.md)
+now tests a redesigned controller: **24/24 synthetic precursor events captured,
+versus 12/24 for standard fixed imaging**, at 40 images each across six evaluation
+seeds. Shifted fixed schedules capture 13/24 and 12/24. Without warning cues the
+new controller loses, 6/24 versus 12/24. The Glimpse lab exposes every seed and
+condition, with actual CUDA Rust Gaussian-fit renders and separately revealed
+evaluation. These controlled results do not change the real-data findings above.
 
 ## Setup (PowerShell, Python 3.11+)
 

@@ -1,0 +1,30 @@
+{
+  "registration_timing": "post-evaluation archive; original new-source hashes checked against pre-run protocol",
+  "sha256": "3dd97d3501998f8df69124caf7b35a31f592a1f05188584dbd82e5132f2550b3",
+  "files": {
+    "scripts/run_controlled_benchmark.py": "647d160ce83916d36274db4b61c488374a6037f2a31555c48a4c0138790ffe84",
+    "experiments/controlled/__init__.py": "a8a1631c2794af46556e271d1be759b0d3560e6fe954ac2282f3943ba09438c7",
+    "experiments/controlled/benchmark.py": "cbea5bf379eb6803b1f2b0ac3905d426ebb110f9828500f5c71f72c7723bb2e9",
+    "experiments/controlled/event_focus.py": "dab80dba39e2ab9791e6e05b97c01d5db1404900f6050b368cdedeb240162f43",
+    "services/science/photon/__init__.py": "5976f1fd2077e4bc95b7ec0c91e9b213a748e8c57b5da9f428d3a3e4f6bf837e",
+    "services/science/photon/adaptive.py": "84d25b33db8436183b811aeb700d06ee03ab5fe3f0e1fa0c611949e19bfca3dd",
+    "services/science/photon/annotations.py": "657371f695288a7c8e3e22bead66b3450a28eebfdb3597c7964079e6343d8eda",
+    "services/science/photon/audit.py": "a023cecd6717227c8da46d3f38a39489bd0fa09d3b3a814d34efffb88323ad9d",
+    "services/science/photon/benchmark.py": "6b8b85f7117682e28d18e1245ae414380e7f65613ad2ea90d907b93ff33abde9",
+    "services/science/photon/cli.py": "95d7dba36b5284d04efa6bc2beac24cef9e99d370f55b3bbd82f1fc62ec45153",
+    "services/science/photon/data.py": "da4f28ecb98d1b686c7a8b333e4169e6407e6116d313706669ddf9429ed18adc",
+    "services/science/photon/development.py": "6bf20becb3263a9c1afad871c7d8ef24267331cd6f31272c22fe781085a65c24",
+    "services/science/photon/gaussian.py": "89c043b37a359980ca0b97bf8eba6ae3a51f361cf0d1e528f77fcc53bb56ae91",
+    "services/science/photon/gpu.py": "b9796105d7c6dadf439ba80423c23e4b1326b18f3547661ca7dc9210702affcc",
+    "services/science/photon/oracle.py": "6d52d6de92d98049ca343efdf162857e120e6b4fa23261dee0f1756511a53699",
+    "services/science/photon/policy.py": "5ef1d544d2212e6cadb1dca85c875d8b0821ea0b1560095247cf03d670f448be",
+    "services/science/photon/replay.py": "6c6318762c43f01765db583f87cae9dc859b341ba2bbdb418b6f7600d43eec1f",
+    "services/science/photon/schemas.py": "8a13cfc9a1a1d2006c1a2ef6b34102d3e19a2def1390ce201e4a9466c3d39179",
+    "services/science/photon/synthetic.py": "6abcf336923b2cf27946dbb7041360bd20db0725fd9d8fd9dcfc9264aa3aff1c",
+    "services/science/photon/tracking.py": "3ffd079ae52a188ae3dff86948861fe6015ee561eabbccd620b2e7fc3bec6e8c",
+    "requirements-dev.lock": "634bb570f061b88e3e26364120afd5824817cd7a454a8962aaac1e5a46d0de23",
+    "pyproject.toml": "ea38a84a82b40610551d8ed80abd5fea8be694b0ee8bc8ac0ad77fd9b1919ef2",
+    "tests/test_controlled_event_focus.py": "38fb5f2d40cc4074724ec598abded8679ee0f32dced29b7091becfc89fdefb16",
+    "scripts/export_controlled_demo.py": "1bc891e589618288a98db7b78d3b1d82714e98647cc1e9189f89a01bb637ca22"
+  }
+}

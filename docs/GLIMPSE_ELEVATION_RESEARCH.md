@@ -1,9 +1,21 @@
 # Glimpse: research and project elevation handoff
 
+**Deep research follow-up (2026-10-24):** See
+[GLIMPSE_DEEP_RESEARCH.md](GLIMPSE_DEEP_RESEARCH.md) for the Astra review, the
+June 2026 CellposeDINO candidate, first-public-date corrections, implementation
+findings, and proposed perception/reliability/decision gates. These are research
+recommendations unless separately recorded as implemented. The user confirmed switching to Astra.
+
+**Latest continuation:** the user subsequently authorized autonomous implementation.
+The opening-page update and an isolated experimental watershed detector are now
+implemented and tested. See [PERCEPTION_EXPERIMENT.md](PERCEPTION_EXPERIMENT.md) for
+actual development results, limits and forecast probes. The earlier discussion-only
+instruction below is historical; the frozen Phase5 benchmark remains protected.
+
 Recorded 2026-10-24. The user approved these directions for investigation and
 requested durable notes before switching Codex accounts. **This is a research
 backlog, not authorization to rewrite the frozen benchmark or implement every
-idea. Latest instruction: discussion/documentation only; no code changes yet.**
+idea. Instruction at the original handoff: discussion/documentation only; no code changes yet.**
 
 ## Where we are
 

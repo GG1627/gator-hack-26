@@ -1,0 +1,34 @@
+{
+  "scope": "controlled synthetic; not biological evidence",
+  "seeds": [
+    101,
+    102,
+    103,
+    104,
+    105,
+    2026
+  ],
+  "budget": 40,
+  "conditions": [
+    "precursor",
+    "abrupt",
+    "quiet"
+  ],
+  "tolerance_frames": 1,
+  "source_sha256": {
+    "scripts\\run_controlled_benchmark.py": "647d160ce83916d36274db4b61c488374a6037f2a31555c48a4c0138790ffe84",
+    "experiments\\controlled\\__init__.py": "a8a1631c2794af46556e271d1be759b0d3560e6fe954ac2282f3943ba09438c7",
+    "experiments\\controlled\\benchmark.py": "cbea5bf379eb6803b1f2b0ac3905d426ebb110f9828500f5c71f72c7723bb2e9",
+    "experiments\\controlled\\event_focus.py": "dab80dba39e2ab9791e6e05b97c01d5db1404900f6050b368cdedeb240162f43"
+  },
+  "hard_limit_seconds": 120,
+  "tuning_split": "held-out seeds",
+  "primary_metric": "events within +/-1 source frame at equal capture budget",
+  "fixed_phases": [
+    0,
+    0.3333333333333333,
+    0.6666666666666666
+  ],
+  "demo_seed": 2026,
+  "image_backend": "CPU analytic Gaussian forward model"
+}
