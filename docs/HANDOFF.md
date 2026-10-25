@@ -1,5 +1,111 @@
 # PHOTON / Peekaboo session handoff
 
+## Account-switch checkpoint - 2026-10-25
+
+This repository checkpoint includes all current slide work, references, prompts
+and the new solution mascot. The user requested committing/pushing everything
+before switching Codex accounts. The Remotion `video/` scaffold and its skill files
+were already included in commit 6cf6859 and remain in the repository.
+
+Current presentation: opening -> problem -> bright solution reveal -> approach ->
+interactive Gaussian explanation -> interactive CUDA Rust explanation -> demo,
+with results inside the demo. Latest user-reviewed work is the CUDA slide. No new
+implementation task has been assigned after it; continue with the user's next
+requested refinement. Keep the seven-slide navigation and scientific contracts.
+
+Start by reading AGENTS.md, PHOTON_SPEC.md, BUILD_PHASES.md and this handoff. The
+latest UI details and executed checks are below. All 7 web tests and the production
+build passed after the final CUDA implementation; screenshot/interaction checks
+covered desktop and mobile. No backend, protocol or evidence changes. Do not rerun
+long scientific benchmarks for frontend work. Phase 5 is complete; human rehearsal,
+fresh-install/recording/submission gates remain open.
+
+Preview: http://127.0.0.1:5174/ . If the server is stopped, run
+`npm.cmd run dev -- --port 5174` in `apps/web`. Deep links: `#solution`, `#approach`,
+`#model`, `#compute`, `#demo`. Supporting design specs, prompts and references are
+under `docs/AFTER_HOURS_DESIGN.md` and `docs/design-exploration/`. QA screenshots and
+scripts are temporary, outside the repo. Ignored local datasets, real-data exports,
+runs, environments and dependencies remain in this workspace; they are not part of
+a fresh Git clone. Sol Medium is sufficient for ordinary frontend refinement.
+
+Suggested continuation: "Read docs/HANDOFF.md and resume from the account-switch
+checkpoint. Tell me where the presentation stands before the next refinement."
+
+**CUDA Rust slide - current checkpoint, 2026-10-25:** replaced the abstract
+CPU/GPU/browser glyphs with fitted-parameter sketch -> native CUDA Rust tile
+module -> actual saved native intensity image. 32 logical tiles cover the 64x64
+frame in groups of 128 output values. Tile selection highlights the exact two-row
+band and reports positions; supports mouse plus roving keyboard arrows/Home/End.
+CPU capture decisions, GPU rendering and saved browser output remain explicit.
+Expanded source disclosure explains kernel math, launch padding, CPU boundary
+repair, correctness verification and real transfer/startup/performance limits.
+
+All 7 existing web tests and production build passed. Playwright Chromium checked
+1920/1440/1366 desktop and 390/320 mobile, desktop fit/no horizontal overflow, tile
+range/band mapping, responsive keyboard movement/roving focus, immutable saved
+pixels/frame0, disclosure/source links, evidence gating and demo/results. No app
+console errors; prior lazy Viewer3D size warning remains. Saved export verification
+for 304-precursor confirms native execution and CPU sample agreement. No GPU
+kernel/algorithm/data/protocol changes, dependencies or fresh benchmarks. Concept
+and prompt: [CUDA provenance](design-exploration/cuda/PROVENANCE.md). QA scripts
+and screenshots remain outside repo in temp peekaboo-after-hours; Browser plugin
+unavailable, so installed Playwright Chromium was used. This work is included in the account-switch repository checkpoint;
+human rehearsal/fresh-install/submission gates remain open.
+
+**Gaussian slide, 2026-10-25:** replaced the static large
+image pair with "What is a Gaussian?", a deterministic browser SVG intensity
+surface and Position / Shape / Brightness sliders. Reset restores illustrative
+values. A separate lower strip retains actual acquired synthetic pixels and
+native CUDA Rust fit at the same acquired frame 0, plus how shape change informs
+capture timing. Source disclosure explains intensity (not physical height),
+relative controls, CPU fitting, aspect-ratio scheduling, held fits and CellSplat4D
+inspiration/limitations. No scientific algorithm, evidence or dependency changes.
+
+All 7 existing web tests and production build passed. Playwright Chromium checked
+1920x1080, 1440x900, 1366x768, 390x844 and 320x740; desktop fit and no horizontal
+overflow. Verified slider-driven geometry/labels, keyboard range handling without
+slide navigation, reset, saved canvas pixels unchanged after control changes,
+both image source indices fixed at 0, no evaluation-only fetch, source disclosure,
+compute/demo navigation and no console errors. Final rendered screenshots compared
+with the ImageGen reference; only the mockup is generated, while the surface is
+analytic code and the small image pair is actual saved evidence. Reference/prompt:
+[Gaussian provenance](design-exploration/gaussian/PROVENANCE.md). Browser plugin
+unavailable; QA used installed Playwright and temp scripts/screenshots outside the
+repo. Prior lazy Viewer3D chunk warning remains. Work remains uncommitted; human
+rehearsal/submission gates stay open.
+
+**Solution reveal + approach, 2026-10-25:** added bright
+full-viewport butter-yellow Meet Peekaboo reveal with a new transparent standing
+capybara illustration and How it works CTA. Rebuilt the following approach as one
+Observe / Estimate / Decide acquisition loop with actual synthetic pixels,
+conceptual Gaussian/decision illustrations, explicit budget constraint and return
+arrow. Sequence is opening, problem, solution, approach, model, compute, demo;
+results stays inside Demo. Existing hashes remain valid; slide counts/titles/
+footers and demo location now come from shared presentation metadata rather than
+hard-coded six-slide offsets. Saved references and asset prompts are in
+[solution-approach provenance](design-exploration/solution-approach/PROVENANCE.md).
+
+All seven existing web tests and production build passed. Chromium verified new
+slides at 1920x1080, 1440x900, 1366x768, 390x844 and 320x740, desktop fit, no horizontal
+overflow, real transparent asset, CTA/focus/back/keyboard, theme return, seven-step
+navigation, direct Demo/archive access, preserved paused replay and featured
+4/4 vs 1/4 / 32 vs 40 results. Evidence remains explicitly gated. No app console
+errors; prior lazy Viewer3D size warning remains. New references and final browser
+screenshots were visually compared. Browser plugin unavailable, so installed
+Playwright Chromium was used; QA scripts/screenshots remain outside the repo in
+the temp peekaboo-after-hours folder. No science/evidence changes, new dependencies,
+commit or push. Human comprehension and final submission gates remain open.
+
+**Problem slide clarity - 2026-10-25:** replaced abstract exposure-cost copy
+with "How do you watch living cells without disrupting them?", explicit frequent
+versus sparse capture tradeoffs, and a conceptual timing diagram highlighting a
+brief division. Kept authentic dataset context, shortened the image caption and
+moved full provenance into Research & references. Closing question leads into
+Choose when to look. Build and focused Chromium layout/content/disclosure/next-slide
+checks passed at 1440x900, 1366x768, 390x844 and 320x740; desktop fits and no
+horizontal overflow or console errors. No science changes. This refinement is
+uncommitted after the earlier 6cf6859 repository checkpoint.
+
 **Full-viewport opening light - 2026-10-25:** moved SideRays into a body portal
 with a fixed, full-viewport layer at (0,0). It no longer inherits the presentation
 max-width, gutters, slide transform, clipping or masks. Opening content stays in

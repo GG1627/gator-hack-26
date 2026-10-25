@@ -2,6 +2,12 @@
 
 Fifteen preliminary visual directions plus L implementation refinements. The current exploration is **round five: capybara scientist, solid colors, and optional SideRays**. L was selected and partially implemented, then rejected during frontend QA. **M / After Hours is now selected.** See the [refined design handoff](../AFTER_HOURS_DESIGN.md) and [screen board](after-hours/screen-board.png). Generated with ImageGen. Specimen imagery, schedules and controls on these boards are illustrative placeholders, not experimental evidence.
 
+The implemented solution reveal and approach refinement have [dedicated references and image prompts](solution-approach/PROVENANCE.md), with a new transparent standing mascot asset.
+
+The interactive Gaussian lesson has a [saved reference and prompt](gaussian/PROVENANCE.md); the production graphic is analytic SVG, with actual saved evidence below it.
+
+The native rendering explanation has a [CUDA reference and prompt](cuda/PROVENANCE.md), with a source-backed interactive tile overlay on actual saved output.
+
 ## Current round — capybara scientist
 
 Brief and next steps: [CAPYBARA_DESIGN_BRIEF.md](../CAPYBARA_DESIGN_BRIEF.md).
