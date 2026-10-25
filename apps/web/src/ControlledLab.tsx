@@ -20,13 +20,26 @@ async function read<T>(file: string, signal: AbortSignal, root: string): Promise
   return response.json();
 }
 
-function ExposureTimeline({ method, t, events, label }: { method: Method; t: number; events?: number[]; label: string }) {
-  return <div className="exposure-lane"><span>{label}</span><svg viewBox="0 0 480 40" preserveAspectRatio="none" role="img" aria-label={`${label}: ${method.acquired_indices.filter(i => i <= t).length} exposures by frame ${t}`}>
-    <line x1="1" y1="25" x2="479" y2="25" className="lane-baseline"/>
-    {method.acquired_indices.filter(i => i <= t).map(i => <line key={i} x1={i * 2 + 1} x2={i * 2 + 1} y1="18" y2="32" className="exposure-tick"/>)}
-    {events?.map((event, index) => <circle key={index} cx={event * 2 + 1} cy="7" r="3" className={method.acquired_indices.some(i => Math.abs(i - event) <= 1) ? 'event-mark caught' : 'event-mark missed'}/>)}
-    <line x1={t * 2 + 1} x2={t * 2 + 1} y1="13" y2="38" className="current-time"/>
-  </svg></div>;
+function ComparisonTimeline({ run, fixedKey, t, events, onSeek }: { run: Experiment; fixedKey: string; t: number; events?: number[]; onSeek: (value: number) => void }) {
+  const progress = t / (run.frame_count - 1) * 100;
+  return <div className="comparison-timeline">
+    <div className="timeline-labels" aria-hidden="true"><span>Fixed schedule</span><span>Peekaboo</span></div>
+    <div className="timeline-plot">
+      <svg viewBox="0 0 1000 80" preserveAspectRatio="none" role="img" aria-label={`Exposure history through frame ${t}. Fixed schedule: ${run.methods[fixedKey].acquired_indices.filter(i => i <= t).length} images. Peekaboo: ${run.methods.event_focus.acquired_indices.filter(i => i <= t).length} images.`}>
+        {([[fixedKey, 22], ['event_focus', 58]] as const).map(([key, y]) => <g key={key} className={key === 'event_focus' ? 'adaptive-lane' : 'fixed-lane'}>
+          <line x1="0" x2="1000" y1={y} y2={y} className="lane-baseline"/>
+          {run.methods[key].acquired_indices.filter(i => i <= t).map(i => <line key={i} x1={i / (run.frame_count - 1) * 1000} x2={i / (run.frame_count - 1) * 1000} y1={Number(y) - 7} y2={Number(y) + 7} className={`exposure-tick ${i === t ? 'just-captured' : ''}`}/>)}
+          {events?.filter(event => event <= t).map((event, index) => {
+            const caught = run.methods[key].acquired_indices.some(i => i <= t && Math.abs(i - event) <= 1);
+            const status = caught ? 'caught' : t <= event + 1 ? 'pending' : 'missed';
+            return <circle key={index} cx={event / (run.frame_count - 1) * 1000} cy={y - 14} r="3" className={`event-mark ${status}`}><title>Division at frame {event} · {caught ? 'covered within ±1 frame' : status === 'pending' ? 'coverage window still open' : 'missed'}</title></circle>;
+          })}
+        </g>)}
+      </svg>
+      <span className="timeline-playhead" style={{ left: `${progress}%` }} aria-hidden="true"/>
+      <input aria-label="Controlled replay frame" aria-valuetext={`Frame ${t} of ${run.frame_count - 1}`} type="range" min={0} max={run.frame_count - 1} value={t} onChange={e => onSeek(Number(e.target.value))}/>
+    </div>
+  </div>;
 }
 
 export function ControlledLab({ active = true }: { active?: boolean }) {
@@ -43,6 +56,7 @@ export function ControlledLab({ active = true }: { active?: boolean }) {
   const [pace, setPace] = useState('quick');
   const [view, setView] = useState('observed');
   const [revealed, setRevealed] = useState(false);
+  const [showDivisions, setShowDivisions] = useState(false);
   const [showResults, setShowResults] = useState(false);
   const [evidence, setEvidence] = useState<Evidence[] | null>(null);
   const [evidenceError, setEvidenceError] = useState('');
@@ -63,7 +77,7 @@ export function ControlledLab({ active = true }: { active?: boolean }) {
     }).catch(e => { if (e.name !== 'AbortError') setError(e.message); });
     return () => controller.abort();
   }, [retry, dataRoot]);
-  useEffect(() => { setT(0); setPlaying(false); setRevealed(false); setShowResults(false); }, [seed, condition, phase]);
+  useEffect(() => { setT(0); setPlaying(false); setRevealed(false); setShowDivisions(false); setShowResults(false); }, [seed, condition, phase]);
   useEffect(() => {
     if (!active) setPlaying(false);
   }, [active]);
@@ -81,17 +95,18 @@ export function ControlledLab({ active = true }: { active?: boolean }) {
   }, [active, playing, run, t, pace, fixedKey]);
   useEffect(() => { if (t === 239) setPlaying(false); }, [t]);
   useEffect(() => {
-    if (!revealed || evidence) return;
+    if ((!revealed && !showDivisions) || evidence) return;
     const controller = new AbortController(); setEvidenceError('');
     read<{ experiments: Evidence[] }>('evidence.json', controller.signal, dataRoot).then(value => {
       if (!controller.signal.aborted) setEvidence(value.experiments);
     }).catch(e => { if (e.name !== 'AbortError') setEvidenceError(e.message); });
     return () => controller.abort();
-  }, [revealed, evidence, dataRoot, evidenceRetry]);
+  }, [revealed, showDivisions, evidence, dataRoot, evidenceRetry]);
   useEffect(() => {
     if (showResults) { resultHeading.current?.focus({ preventScroll: true }); window.scrollTo({ top: 0, behavior: 'instant' }); }
   }, [showResults]);
   const result = revealed ? evidence?.find(e => e.key === run?.key) : undefined;
+  const divisionEvents = showDivisions ? evidence?.find(e => e.key === run?.key)?.events : undefined;
   const focusMetric = result?.metrics.event_focus;
   const fixedMetric = result?.metrics[fixedKey];
   const focusImages = run?.methods.event_focus.acquired_indices.length ?? 0;
@@ -110,8 +125,8 @@ export function ControlledLab({ active = true }: { active?: boolean }) {
   };
   const seek = (value: number) => { setT(value); setPlaying(false); };
   const backToComparison = () => { window.scrollTo({ top: 0, behavior: 'instant' }); setShowResults(false); window.requestAnimationFrame(() => comparisonHeading.current?.focus({ preventScroll: true })); };
-  const replay = () => { window.scrollTo({ top: 0, behavior: 'instant' }); setRevealed(false); setShowResults(false); setT(0); setPlaying(true); window.requestAnimationFrame(() => comparisonHeading.current?.focus({ preventScroll: true })); };
-  const openResults = () => { setPlaying(false); setRevealed(true); setShowResults(true); };
+  const replay = () => { window.scrollTo({ top: 0, behavior: 'instant' }); setRevealed(false); setShowDivisions(false); setShowResults(false); setT(0); setPlaying(true); window.requestAnimationFrame(() => comparisonHeading.current?.focus({ preventScroll: true })); };
+  const openResults = () => { setPlaying(false); setRevealed(true); setShowDivisions(true); setShowResults(true); };
   const burst = run?.methods.event_focus.decisions.find(d => (d.target_gap ?? 12) < 12)?.t;
 
   return <section id="controlled-lab" className="controlled-lab" aria-label="Controlled synthetic microscopy comparison">
@@ -129,15 +144,19 @@ export function ControlledLab({ active = true }: { active?: boolean }) {
         <div className="demo-layout"><div className="lab-pair">{[[fixedKey, 'Fixed schedule'], ['event_focus', 'Peekaboo']].map(([key, title]) => {
             const method = run.methods[key], indices = method.acquired_indices.filter(i => i <= t), source = indices.at(-1) ?? 0;
             const capture = source === t, decision = method.decisions[t];
-            return <article key={key} className={`lab-panel ${key === 'event_focus' ? 'adaptive' : ''}`}>
-              <header><h2>{title}</h2><span>{method.acquired_indices.length} images</span></header>
+            const changing = (decision?.target_gap ?? 12) < 12;
+            const guarded = decision?.reason === 'budget coverage guard';
+            return <article key={key} className={`lab-panel ${key === 'event_focus' ? 'adaptive' : ''}`} data-capturing={capture} data-changing={key === 'event_focus' && changing && !guarded && t > 0}>
+              <header><h2>{title}</h2><span>{method.acquired_indices.length} image budget</span></header>
               <div className="lab-optical">{active ? <Microscope root={dataRoot} file={view === 'model' && run.model ? run.model : run.observed} frame={source} label={`${title}: ${view === 'model' ? 'Gaussian fit of acquired image' : 'acquired synthetic image'} at frame ${source}; replay clock ${t}`}/> : null}<CaptureFeedback source={source} running={playing && active}/><span className="optical-label">{view === 'model' ? 'Gaussian fit' : 'Acquired pixels'}</span></div>
-              <CaptureStatus capture={capture} source={source} count={indices.length}/>
-              <p className="panel-reason">{key === 'event_focus' ? decision?.reason === 'budget coverage guard' ? 'Budget guard · capture required' : t === 0 ? 'First observation' : (decision?.target_gap ?? 12) < 12 ? 'Shape changing · look more often' : 'Shape stable · wait longer' : `Even spacing · every ~${((run.frame_count - 1) / (fixedImages - 1)).toFixed(1)} frames`}</p>
+              <div key={source} className={playing && source > 0 ? 'capture-update' : undefined}><CaptureStatus capture={capture} source={source} count={indices.length}/></div>
+              <p className="panel-reason">{key === 'event_focus' ? <><span>{guarded ? 'Budget guard' : t === 0 ? 'First observation' : changing ? 'Shape changing' : 'Shape stable'}</span><strong>{guarded ? 'Capture required' : t === 0 ? 'Establish the starting point' : changing ? 'Capture sooner' : 'Wait longer'}</strong></> : <><span>Even spacing</span><strong>Every ~{((run.frame_count - 1) / (fixedImages - 1)).toFixed(1)} frames</strong></>}</p>
             </article>;
           })}</div></div>
-        <div className="demo-timing"><span className="timing-label">Exposure history<small>One shared source clock</small></span><div className="exposure-lanes"><ExposureTimeline method={run.methods[fixedKey]} t={t} events={revealed ? result?.events : undefined} label="Fixed schedule"/><ExposureTimeline method={run.methods.event_focus} t={t} events={revealed ? result?.events : undefined} label="Peekaboo"/></div></div>
-        <div className="lab-transport"><button className="round-play" aria-label={playing ? 'Pause controlled replay' : 'Play controlled replay'} onClick={() => { if (t === 239) replay(); else setPlaying(v => !v); }}><Icon name={playing ? 'pause' : 'play'} size={21}/></button><label className="lab-scrubber"><span className="sr-only">Controlled replay frame</span><input type="range" min={0} max={239} value={t} onChange={e => seek(Number(e.target.value))}/></label><output className="replay-time">{String(t).padStart(3, '0')}<span> / 239</span></output><Button variant="quiet" className="results-button" onClick={openResults}>{t === 239 ? 'View results' : 'Reveal run results'}<Arrow/></Button><button className="text-button" disabled={burst === undefined} onClick={() => seek(Math.max(0, (burst ?? 0) - 2))}>Find a burst<Arrow/></button></div>
+        <div className="demo-playback">
+          <div className="lab-transport"><button className="round-play" aria-label={playing ? 'Pause controlled replay' : 'Play controlled replay'} onClick={() => { if (t === 239) replay(); else setPlaying(v => !v); }}><Icon name={playing ? 'pause' : 'play'} size={18}/><span>{playing ? 'Pause comparison' : t === 239 ? 'Replay comparison' : 'Play comparison'}</span></button><button className="text-button" disabled={burst === undefined} onClick={() => seek(Math.max(0, (burst ?? 0) - 2))}>Find a burst<Arrow/></button><div className="division-controls"><button className="division-toggle" aria-pressed={showDivisions} onClick={() => setShowDivisions(value => !value)}>{showDivisions ? 'Hide divisions' : 'Show divisions'}</button>{divisionEvents ? <span className="division-legend"><span><i className="covered"/>Division covered</span><span><i/>Missed</span><small>Within ±1 frame</small></span> : showDivisions && !evidenceError ? <span role="status">Loading division markers…</span> : null}{showDivisions && evidenceError ? <button className="division-toggle" onClick={() => setEvidenceRetry(value => value + 1)}>Retry division markers</button> : null}</div><output className="replay-time">Frame {String(t).padStart(3, '0')}<span> / 239</span></output><Button variant="quiet" className="results-button" onClick={openResults}>{t === 239 ? 'View results' : 'Reveal run results'}<Arrow/></Button></div>
+          <ComparisonTimeline run={run} fixedKey={fixedKey} t={t} events={divisionEvents} onSeek={seek}/>
+        </div>
 
       </>}
     </> : <div className="results-view">

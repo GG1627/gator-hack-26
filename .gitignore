@@ -17,3 +17,4 @@ apps/web/public/demo/*
 !apps/web/public/demo/controlled/
 apps/web/.vite/
 *.tsbuildinfo
+debug.log
